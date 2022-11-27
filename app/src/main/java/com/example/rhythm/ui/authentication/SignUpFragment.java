@@ -15,11 +15,13 @@ import android.view.ViewGroup;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentSignUpBinding;
+import com.example.rhythm.utils.Utils;
 
 
 public class SignUpFragment extends Fragment {
 
-FragmentSignUpBinding binding;
+    Utils utils;
+    FragmentSignUpBinding binding;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -42,6 +44,7 @@ FragmentSignUpBinding binding;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentSignUpBinding.bind(view);
+        utils = new Utils();
 
         binding.signInTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +53,23 @@ FragmentSignUpBinding binding;
             }
         });
 
-    }
+        binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!utils.isInternetConnected(getContext()))
+                    utils.alertDialog("Error", "No internet Connection", getContext());
 
+                if (binding.emailTxt.getText().toString().isEmpty() || binding.passwordTxt.getText().toString().isEmpty()
+                ||binding.fullNameTxt.getText().toString().isEmpty() || binding.dateOfBirth.getText().toString().isEmpty())
+                    utils.alertDialog("Error", "all fields required", getContext());
+
+                if(!binding.genderMale.isChecked() && !binding.genderFemale.isChecked())
+                    utils.alertDialog("Error", "please select your gender", getContext());
+
+            }
+        });
+
+    }
 
 
 }

@@ -12,14 +12,17 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentLoginBinding;
+import com.example.rhythm.utils.Utils;
 
 
 public class LoginFragment extends Fragment {
 
     FragmentLoginBinding binding;
+    private Utils utils;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -62,6 +65,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentLoginBinding.bind(view);
+        utils = new Utils();
 
         binding.signUpTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +73,19 @@ public class LoginFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_signUpFragment);
             }
         });
+
+        binding.signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!utils.isInternetConnected(getContext()))
+                    utils.alertDialog("Error", "No internet Connection", getContext());
+
+                if (binding.emailTxt.getText().toString().isEmpty() || binding.passwordTxt.getText().toString().isEmpty())
+                    utils.alertDialog("Error", "all fields required", getContext());
+
+            }
+        });
     }
-
-
-
-
 
 
 }
