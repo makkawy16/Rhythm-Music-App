@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "462637561598",
+    "project_id": "rhythm-410a0",
+    "storage_bucket": "rhythm-410a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:462637561598:android:302224ff9515ef946d17af",
+        "android_client_info": {
+          "package_name": "com.example.rhythm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "462637561598-1ncb2jhplimolpdpeqcq3sqjiehhm64k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rhythm",
+            "certificate_hash": "21d3005c73bef8bb350f37057d09ebc5a85e9253"
+          }
+        },
+        {
+          "client_id": "462637561598-fl8qc4il24kfoi75p4a0uj13u8ggn8iv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8Yg-vbUy1ESTOyveGOcHst-u5YTa01_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "462637561598-fl8qc4il24kfoi75p4a0uj13u8ggn8iv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

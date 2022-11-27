@@ -16,7 +16,8 @@ public class AuthenticationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAuthenticationBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_authentication);
+        setContentView(binding.getRoot());
+        getSupportActionBar().hide();
 
     }
 }
