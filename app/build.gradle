@@ -49,6 +49,8 @@ dependencies {
     //picasso
     implementation 'com.squareup.picasso:picasso:2.8'
 
+    //circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

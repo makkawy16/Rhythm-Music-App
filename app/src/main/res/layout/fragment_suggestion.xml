@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_auth"
+    android:orientation="vertical"
+    tools:context=".ui.authentication.suggestionFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose 3 or more artist you like. "
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp"
+        android:layout_margin="@dimen/_10sdp"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:hint="@string/search_txt"
+        app:startIconDrawable="@drawable/search_icon"
+        android:textColorHint="@color/hint_txt_color"
+        app:boxCornerRadiusBottomEnd="@dimen/_25sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_25sdp"
+        app:boxCornerRadiusTopEnd="@dimen/_25sdp"
+        app:boxCornerRadiusTopStart="@dimen/_25sdp"
+        app:boxStrokeColor="@color/background_auth"
+        app:boxStrokeWidth="@dimen/_1sdp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_txt"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#221e1d"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@color/white" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:src="@color/white"/>
+
+
+</LinearLayout>

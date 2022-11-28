@@ -17,12 +17,17 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentLoginBinding;
 import com.example.rhythm.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class LoginFragment extends Fragment {
 
     FragmentLoginBinding binding;
     private Utils utils;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -80,11 +85,33 @@ public class LoginFragment extends Fragment {
                 if (!utils.isInternetConnected(getContext()))
                     utils.alertDialog("Error", "No internet Connection", getContext());
 
-                if (binding.emailTxt.getText().toString().isEmpty() || binding.passwordTxt.getText().toString().isEmpty())
+                else if (binding.emailTxt.getText().toString().isEmpty() || binding.passwordTxt.getText().toString().isEmpty())
                     utils.alertDialog("Error", "all fields required", getContext());
+                else
+                    login();
 
             }
         });
+    }
+
+    private void  login(){
+        utils.waitnig("Wait.." , "login " , getContext());
+
+        mAuth.signInWithEmailAndPassword(binding.emailTxt.getText().toString() , binding.passwordTxt.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            utils.mloadingBar.dismiss();
+                            Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else
+                            utils.alertDialog("Error" , task.getException().getLocalizedMessage() , getContext());
+                        utils.mloadingBar.dismiss();
+                    }
+                });
+
     }
 
 

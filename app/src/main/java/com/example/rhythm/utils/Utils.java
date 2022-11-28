@@ -9,7 +9,9 @@ import android.net.NetworkInfo;
 
 public class Utils {
 
-    public void alertDialog(String title, String msg , Context context) {
+    public ProgressDialog mloadingBar;
+
+    public void alertDialog(String title, String msg, Context context) {
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
         dialog.setMessage(msg);
@@ -39,12 +41,13 @@ public class Utils {
 
     }
 
-    public void waitnig(String title , String message, Context context) {
-        ProgressDialog mloadingBar = new ProgressDialog(context);
+    public void waitnig(String title, String message, Context context) {
+        mloadingBar = new ProgressDialog(context);
         mloadingBar.setTitle(title);
         mloadingBar.setMessage(message);
         mloadingBar.setCanceledOnTouchOutside(false);
         mloadingBar.show();
+
     }
 
 }
