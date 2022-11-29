@@ -2,6 +2,7 @@ package com.example.rhythm.ui.authentication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentLoginBinding;
+import com.example.rhythm.ui.homePage.HomePageActivity;
 import com.example.rhythm.utils.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -104,6 +106,8 @@ public class LoginFragment extends Fragment {
                         if (task.isSuccessful()){
                             utils.mloadingBar.dismiss();
                             Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                            getActivity().finish();
+                            startActivity(new Intent(getActivity() , HomePageActivity.class));
 
                         }
                         else

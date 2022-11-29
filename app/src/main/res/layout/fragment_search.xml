@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_auth"
-    android:orientation="vertical"
-    tools:context=".ui.authentication.suggestionFragment">
+    tools:context=".ui.homePage.SearchFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose 3 or more artist you like. "
-        android:textColor="@color/white"
-        android:textSize="@dimen/_20sdp"
-        android:layout_margin="@dimen/_10sdp"
-        />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +19,7 @@
         app:boxCornerRadiusBottomStart="@dimen/_25sdp"
         app:boxCornerRadiusTopEnd="@dimen/_25sdp"
         app:boxCornerRadiusTopStart="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         app:boxStrokeColor="@color/background_auth"
         app:boxStrokeWidth="@dimen/_1sdp">
 
@@ -45,11 +37,4 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_margin="@dimen/_10sdp"
-        android:src="@color/white"/>
-
-
-</LinearLayout>
+</FrameLayout>

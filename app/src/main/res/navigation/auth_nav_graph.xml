@@ -34,5 +34,7 @@
         android:id="@+id/suggestionFragment"
         android:name="com.example.rhythm.ui.authentication.suggestionFragment"
         android:label="fragment_suggestion"
-        tools:layout="@layout/fragment_suggestion" />
+        tools:layout="@layout/fragment_suggestion"
+        app:popUpTo="@id/auth_nav_graph"
+        app:popUpToInclusive="true"/>
 </navigation>
