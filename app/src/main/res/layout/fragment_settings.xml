@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     tools:context=".ui.homePage.SettingsFragment">
 
     <LinearLayout
+        android:id="@+id/user_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_16sdp"
@@ -27,6 +28,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
@@ -35,15 +37,22 @@
                 android:textSize="@dimen/_16ssp" />
 
             <TextView
+                android:id="@+id/view_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/view_profile"
-                android:textSize="@dimen/_14ssp"/>
+                android:textSize="@dimen/_14ssp" />
         </LinearLayout>
-
-
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/settings_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/user_layout"
+        android:layout_marginTop="@dimen/_10sdp"
+        tools:listitem="@layout/item_settings_layout"/>
 
-</FrameLayout>
+
+</RelativeLayout>
