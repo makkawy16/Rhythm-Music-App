@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1675" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable/buttonshape.xml" value="0.1555" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable/edit_text_layout.xml" value="0.1945" />
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable/home_selector.xml" value="0.127" />
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1675" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable/search_icon.xml" value="0.181" />
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/drawable/search_selector.xml" value="0.127" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/activity_authentication.xml" value="0.2578125" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/activity_main.xml" value="0.24270833333333333" />
@@ -15,6 +19,7 @@
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_settings.xml" value="0.2578125" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_sign_up.xml" value="0.264" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_suggestion.xml" value="0.12537993920972645" />
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/menu-v26/bottom_nav_menu.xml" value="0.25677083333333334" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2578125" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1675" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1675" />

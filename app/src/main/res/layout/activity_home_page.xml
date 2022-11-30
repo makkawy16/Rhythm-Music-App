@@ -12,7 +12,8 @@
          android:id="@+id/bottomNavigation"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:background="#434141"
+         android:background="#2a2727"
+         
          app:layout_constraintBottom_toBottomOf="parent"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
