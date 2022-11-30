@@ -6,4 +6,6 @@
     <string name="full_name">Full Name</string>
     <string name="password_txt">Password</string>
     <string name="search_txt">Search</string>
+    <string name="username">UserName</string>
+    <string name="view_profile">view profile</string>
 </resources>
