@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentSettingsBinding;
@@ -86,13 +87,21 @@ public class SettingsFragment extends Fragment {
         itemName.add("Privacy & Social");
         itemName.add("Audio Quality");
         itemName.add("Notification");
-      //  settingsAdapter.addItem(itemName);
     }
 
+    SettingsAdapter.ItemClickListener onItemClicked = new SettingsAdapter.ItemClickListener() {
+        @Override
+        public void onItemCLiked(String itemName) {
+            Toast.makeText(getContext(), itemName+" Clicked", Toast.LENGTH_SHORT).show();
+        }
+    };
+
     private void initSettingsRecycler(){
-        settingsAdapter = new SettingsAdapter(itemName , getContext());
+        settingsAdapter = new SettingsAdapter(itemName , getContext() , onItemClicked);
         binding.settingsRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.settingsRecycler.setAdapter(settingsAdapter);
 
     }
+
+
 }

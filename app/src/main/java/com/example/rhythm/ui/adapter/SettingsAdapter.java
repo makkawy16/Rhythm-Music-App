@@ -2,13 +2,11 @@ package com.example.rhythm.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.rhythm.databinding.FragmentSettingsBinding;
 import com.example.rhythm.databinding.ItemSettingsLayoutBinding;
 
 import java.util.List;
@@ -18,17 +16,16 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
 
     List<String> settingItemName;
     Context context;
+    public ItemClickListener itemClickListener;
 
 
-    public SettingsAdapter(List<String> settingItemName , Context context) {
+    public SettingsAdapter(List<String> settingItemName, Context context, ItemClickListener itemClickListener) {
         this.settingItemName = settingItemName;
         this.context = context;
+        this.itemClickListener = itemClickListener;
     }
 
-    public void addItem(List<String> settingItemName) {
-        this.settingItemName = settingItemName;
-        notifyDataSetChanged();
-    }
+
 
     @NonNull
     @Override
@@ -42,6 +39,11 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
     public void onBindViewHolder(@NonNull SettingsViewHolder holder, int position) {
         String itemName = settingItemName.get(position);
         holder.binding.itemSettingName.setText(itemName);
+
+        holder.binding.itemSettingName.setOnClickListener(view ->{
+            itemClickListener.onItemCLiked(itemName);
+
+        });
 
     }
 
@@ -59,6 +61,10 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
             this.binding = binding;
 
         }
+    }
+
+    public interface ItemClickListener {
+        void onItemCLiked(String itemName);
     }
 
 
