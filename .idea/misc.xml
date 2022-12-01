@@ -20,8 +20,14 @@
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_search.xml" value="0.2578125" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_settings.xml" value="0.2578125" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_sign_up.xml" value="0.264" />
+<<<<<<< HEAD
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_suggestion.xml" value="0.12537993920972645" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/item_settings_layout.xml" value="0.25677083333333334" />
+=======
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/fragment_suggestion.xml" value="0.2" />
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/item_settings_layout.xml" value="0.25677083333333334" />
+        <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/layout/item_singer_suggest_layout.xml" value="0.25677083333333334" />
+>>>>>>> authentication
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/menu-v26/bottom_nav_menu.xml" value="0.25677083333333334" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2578125" />
         <entry key="..\:/final project music applictaion/Rhythm App/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1675" />

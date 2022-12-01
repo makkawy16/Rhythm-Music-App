@@ -45,11 +45,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <de.hdodenhof.circleimageview.CircleImageView
+<!--    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
         android:layout_margin="@dimen/_10sdp"
-        android:src="@color/white"/>
+        android:src="@color/white"/>-->
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_singer_suggest_layout"
+        />
 
 </LinearLayout>
