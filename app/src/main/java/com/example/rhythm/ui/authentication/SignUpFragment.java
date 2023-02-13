@@ -2,6 +2,7 @@ package com.example.rhythm.ui.authentication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,14 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.data.model.UserModel;
 import com.example.rhythm.databinding.FragmentSignUpBinding;
+import com.example.rhythm.ui.homePage.HomePageActivity;
 import com.example.rhythm.utils.Utils;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,9 +36,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Arrays;
+
 
 public class SignUpFragment extends Fragment {
-
     Utils utils;
     FragmentSignUpBinding binding;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -44,6 +54,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -51,6 +62,8 @@ public class SignUpFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
+
+
     }
 
     @Override
@@ -58,7 +71,7 @@ public class SignUpFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentSignUpBinding.bind(view);
         utils = new Utils();
-         gender = checkGender();
+        gender = checkGender();
 
         binding.signInTxt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +96,23 @@ public class SignUpFragment extends Fragment {
                     signUp();
             }
         });
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken != null && accessToken.isExpired() == false) {
+            startActivity(new Intent(getActivity(), HomePageActivity.class));
+            getActivity().finish();
+        }
+
+
+        binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
+
+
+            }
+        });
+
 
     }
 
@@ -159,8 +189,7 @@ public class SignUpFragment extends Fragment {
         return gender;
     }
 
-    private void clear()
-    {
+    private void clear() {
         binding.fullNameTxt.getText().clear();
         binding.emailTxt.getText().clear();
         binding.passwordTxt.getText().clear();
@@ -168,4 +197,6 @@ public class SignUpFragment extends Fragment {
         binding.genderFemale.clearFocus();
         binding.genderMale.clearFocus();
     }
+
+
 }

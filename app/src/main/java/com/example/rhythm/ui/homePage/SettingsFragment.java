@@ -1,5 +1,6 @@
 package com.example.rhythm.ui.homePage;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentSettingsBinding;
 import com.example.rhythm.ui.adapter.SettingsAdapter;
+import com.example.rhythm.ui.authentication.AuthenticationActivity;
+import com.facebook.login.LoginManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +77,15 @@ public class SettingsFragment extends Fragment {
         settingsItems();
 
         initSettingsRecycler();
+
+        binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logOut();
+                startActivity(new Intent(getActivity(), AuthenticationActivity.class));
+                getActivity().finish();
+            }
+        });
 
 
 

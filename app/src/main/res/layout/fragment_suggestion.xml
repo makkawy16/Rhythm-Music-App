@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,6 +9,7 @@
     tools:context=".ui.authentication.suggestionFragment">
 
     <TextView
+        android:id="@+id/choosetxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose 3 or more artist you like. "
@@ -17,6 +18,8 @@
         android:layout_margin="@dimen/_10sdp"
         />
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/search_layout"
+        android:layout_below="@id/choosetxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_15sdp"
@@ -33,8 +36,6 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_txt"
-
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#221e1d"
@@ -51,10 +52,28 @@
         android:layout_margin="@dimen/_10sdp"
         android:src="@color/white"/>-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_singer_suggest_layout"
-        />
 
-</LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/buttonshape"/>
+
+     <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/singer_recylcer"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/search_layout"
+       tools:listitem="@layout/item_singer_suggest_layout"
+         android:layout_marginBottom="@dimen/_10sdp"
+         android:layout_above="@id/nextBtn"
+       />
+
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.rhythm.adapter;
+package com.example.rhythm.ui.adapter;
 
 import android.view.View;
 

@@ -2,6 +2,7 @@ package com.example.rhythm.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -40,8 +41,16 @@ public class SettingsAdapter extends RecyclerView.Adapter<SettingsAdapter.Settin
         String itemName = settingItemName.get(position);
         holder.binding.itemSettingName.setText(itemName);
 
-        holder.binding.itemSettingName.setOnClickListener(view ->{
+        holder.binding.settingItem.setOnClickListener(view ->{
             itemClickListener.onItemCLiked(itemName);
+
+            holder.binding.arrowBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemClickListener.onItemCLiked(itemName);
+
+                }
+            });
 
         });
 

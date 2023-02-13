@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rhythm</string>
+    <string name="email_address">البريد الالكتروني</string>
+    <string name="full_name">الاسم</string>
+    <string name="password_txt">كلمة المرور</string>
+    <string name="search_txt">بحث</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="view_profile">عرض الصفحة الشخصية</string>
+    <string name="item">item</string>
+    <string name="next">التالي</string>
+    <string name="date_of_birth">تاريخ الميلاد</string>
+    <string name="dd_mm_yyyy">يوم/شهر/سنة</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثى</string>
+    <string name="sign_up">اشتراك</string>
+    <string name="already_have_an_acoount">هل بالفعل لديك حساب؟</string>
+    <string name="sign_in">تسجيل دخول</string>
+</resources>

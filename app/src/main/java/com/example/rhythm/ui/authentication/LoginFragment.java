@@ -19,10 +19,18 @@ import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentLoginBinding;
 import com.example.rhythm.ui.homePage.HomePageActivity;
 import com.example.rhythm.utils.Utils;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
 
 
 public class LoginFragment extends Fragment {
@@ -30,6 +38,8 @@ public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
     private Utils utils;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    CallbackManager callbackManager;
+    boolean bool = false;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -81,6 +91,12 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        if (accessToken != null && accessToken.isExpired() == false) {
+            startActivity(new Intent(getActivity(), HomePageActivity.class));
+            getActivity().finish();
+        }
+
         binding.signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,24 +110,68 @@ public class LoginFragment extends Fragment {
 
             }
         });
+
+
+
+/*
+        binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
+
+                if (facebookLogin(view))
+                    startActivity(new Intent(getActivity(), HomePageActivity.class));
+
+            }
+        });*/
+
+
     }
 
-    private void  login(){
-        utils.waitnig("Wait.." , "login " , getContext());
+   /* private boolean facebookLogin(View view) {
 
-        mAuth.signInWithEmailAndPassword(binding.emailTxt.getText().toString() , binding.passwordTxt.getText().toString())
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                        bool = true;
+                        startActivity(new Intent(getActivity(), HomePageActivity.class));
+                        getActivity().finish();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                        bool = false;
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        bool = false;
+                        // App code
+                    }
+                });
+        return bool;
+    }*/
+
+    private void login() {
+        utils.waitnig("Wait..", "login ", getContext());
+
+        mAuth.signInWithEmailAndPassword(binding.emailTxt.getText().toString(), binding.passwordTxt.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             utils.mloadingBar.dismiss();
                             Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
                             getActivity().finish();
-                            startActivity(new Intent(getActivity() , HomePageActivity.class));
+                            startActivity(new Intent(getActivity(), HomePageActivity.class));
 
-                        }
-                        else
-                            utils.alertDialog("Error" , task.getException().getLocalizedMessage() , getContext());
+                        } else
+                            utils.alertDialog("Error", task.getException().getLocalizedMessage(), getContext());
                         utils.mloadingBar.dismiss();
                     }
                 });
