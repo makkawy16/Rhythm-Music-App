@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,14 @@ import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentSettingsBinding;
 import com.example.rhythm.ui.adapter.SettingsAdapter;
 import com.example.rhythm.ui.authentication.AuthenticationActivity;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +95,36 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        GraphRequest request = GraphRequest.newMeRequest(
+                accessToken,
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(
+                            JSONObject object,
+                            GraphResponse response) {
+                        // Application code
+
+                        try {
+                            String username = object.getString("name");
+                            binding.userName.setText(username);
+
+                            String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                            Picasso.get().load(url).into(binding.profilePic);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.d("sssssssssss", "fail: " + e.getLocalizedMessage());
+                        }
+
+                    }
+
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,link,picture.type(large)");
+        request.setParameters(parameters);
+        request.executeAsync();
 
 
     }
