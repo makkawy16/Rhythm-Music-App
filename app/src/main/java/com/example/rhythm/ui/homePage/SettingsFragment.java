@@ -18,6 +18,7 @@ import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentSettingsBinding;
 import com.example.rhythm.ui.adapter.SettingsAdapter;
 import com.example.rhythm.ui.authentication.AuthenticationActivity;
+import com.example.rhythm.utils.Utils;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -35,7 +36,8 @@ public class SettingsFragment extends Fragment {
 
     FragmentSettingsBinding binding;
     SettingsAdapter settingsAdapter;
-    List<String>itemName = new ArrayList<>();
+    List<String> itemName = new ArrayList<>();
+    Utils utils = new Utils();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -80,57 +82,63 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding=FragmentSettingsBinding.bind(view);
+        binding = FragmentSettingsBinding.bind(view);
 
         settingsItems();
 
         initSettingsRecycler();
 
-        binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginManager.getInstance().logOut();
-                startActivity(new Intent(getActivity(), AuthenticationActivity.class));
-                getActivity().finish();
-            }
-        });
+
+        if (utils.isInternetConnected(getContext())) {
+
+            binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LoginManager.getInstance().logOut();
+                    startActivity(new Intent(getActivity(), AuthenticationActivity.class));
+                    getActivity().finish();
+                }
+            });
 
 
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        GraphRequest request = GraphRequest.newMeRequest(
-                accessToken,
-                new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(
-                            JSONObject object,
-                            GraphResponse response) {
-                        // Application code
+            AccessToken accessToken = AccessToken.getCurrentAccessToken();
+            GraphRequest request = GraphRequest.newMeRequest(
+                    accessToken,
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(
+                                JSONObject object,
+                                GraphResponse response) {
+                            // Application code
 
-                        try {
-                            String username = object.getString("name");
-                            binding.userName.setText(username);
+                            try {
+                                String username = object.getString("name");
+                                binding.userName.setText(username);
 
-                            String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                            Picasso.get().load(url).into(binding.profilePic);
+                                String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                Picasso.get().load(url).into(binding.profilePic);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.d("sssssssssss", "fail: " + e.getLocalizedMessage());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.d("sssssssssss", "fail: " + e.getLocalizedMessage());
+                            }
+
                         }
 
-                    }
-
-                });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,name,link,picture.type(large)");
-        request.setParameters(parameters);
-        request.executeAsync();
-
+                    });
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id,name,link,picture.type(large)");
+            request.setParameters(parameters);
+            request.executeAsync();
+        }
+        else {
+            utils.alertDialog("Error" , "No Internet Connection please try again" , getContext());
+        }
 
     }
 
-    private void settingsItems(){
-       itemName.add("Account");
+    private void settingsItems() {
+        itemName.add("Account");
         itemName.add("Data Saver");
         itemName.add("Languages");
         itemName.add("Playback");
@@ -142,12 +150,12 @@ public class SettingsFragment extends Fragment {
     SettingsAdapter.ItemClickListener onItemClicked = new SettingsAdapter.ItemClickListener() {
         @Override
         public void onItemCLiked(String itemName) {
-            Toast.makeText(getContext(), itemName+" Clicked", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), itemName + " Clicked", Toast.LENGTH_SHORT).show();
         }
     };
 
-    private void initSettingsRecycler(){
-        settingsAdapter = new SettingsAdapter(itemName , getContext() , onItemClicked);
+    private void initSettingsRecycler() {
+        settingsAdapter = new SettingsAdapter(itemName, getContext(), onItemClicked);
         binding.settingsRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.settingsRecycler.setAdapter(settingsAdapter);
 

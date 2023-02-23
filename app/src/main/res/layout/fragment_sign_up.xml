@@ -17,11 +17,12 @@
 
 
             <ImageView
-                android:layout_width="@dimen/_250sdp"
-                android:layout_height="@dimen/_110sdp"
+                android:layout_width="@dimen/_350sdp"
+                android:layout_height="@dimen/_200sdp"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginBottom="@dimen/_25sdp"
-                android:src="@drawable/sgin_up_logo"
+                android:src="@drawable/new_logo"
 
                 />
 

@@ -14,9 +14,9 @@
         android:orientation="vertical">
 <ImageView
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_150sdp"
+    android:layout_height="@dimen/_200sdp"
     android:layout_marginBottom="@dimen/_20sdp"
-    android:src="@drawable/sgin_in_logo"/>
+    android:src="@drawable/new_logo"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
