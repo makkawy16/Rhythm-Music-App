@@ -13,7 +13,7 @@
         />
     <item android:title=""
         android:id="@+id/library_nav"
-        android:icon="@drawable/library_icon"/>
+        android:icon="@drawable/library_selector"/>
     <item android:title=""
         android:id="@+id/settings_nav"
         android:icon="@drawable/settings_selector"/>

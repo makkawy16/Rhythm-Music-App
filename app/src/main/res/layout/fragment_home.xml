@@ -1,25 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_auth"
     tools:context=".ui.homePage.HomeFragment">
 
     <TextView
+        android:id="@+id/welcometxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/_16sdp"
         android:text="Welcome"
         android:textColor="@color/white"
         android:textSize="@dimen/_35sdp"
-        android:layout_margin="@dimen/_16sdp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/welcometxt">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/alltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/_8sdp"
+                android:text="All"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/newtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/_8sdp"
+                android:text="New"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/populartxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/_8sdp"
+                android:text="Popular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/chartstxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/_8sdp"
+                android:text="Charts"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
+
+            <TextView
+                android:id="@+id/favtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/_8sdp"
+                android:text="Favourites"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
 
 
-
-
+        </LinearLayout>
+    </HorizontalScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
