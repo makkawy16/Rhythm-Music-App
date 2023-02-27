@@ -112,12 +112,15 @@ public class SettingsFragment extends Fragment {
                             // Application code
 
                             try {
-                                String username = object.getString("name");
-                                binding.userName.setText(username);
+                                if (object != null) {
+                                    String username = object.getString("name");
+                                    if (!username.isEmpty())
+                                        binding.userName.setText(username);
 
-                                String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
-                                Picasso.get().load(url).into(binding.profilePic);
-
+                                    String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
+                                    if (!url.isEmpty())
+                                        Picasso.get().load(url).into(binding.profilePic);
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.d("sssssssssss", "fail: " + e.getLocalizedMessage());
@@ -130,9 +133,8 @@ public class SettingsFragment extends Fragment {
             parameters.putString("fields", "id,name,link,picture.type(large)");
             request.setParameters(parameters);
             request.executeAsync();
-        }
-        else {
-            utils.alertDialog("Error" , "No Internet Connection please try again" , getContext());
+        } else {
+            utils.alertDialog("Error", "No Internet Connection please try again", getContext());
         }
 
     }

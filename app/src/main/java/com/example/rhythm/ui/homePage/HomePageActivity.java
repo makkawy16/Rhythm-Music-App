@@ -50,6 +50,9 @@ public class HomePageActivity extends AppCompatActivity {
                     case R.id.settings_nav:
                         replaceFragment(new SettingsFragment());
                         break;
+                    case R.id.library_nav:
+                        replaceFragment(new LibraryFragment());
+                        break;
 
                 }
 

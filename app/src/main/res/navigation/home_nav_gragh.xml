@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -28,6 +31,9 @@
         <action
             android:id="@+id/action_searchFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -40,5 +46,20 @@
         <action
             android:id="@+id/action_settingsFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.example.rhythm.ui.homePage.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_libraryFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>

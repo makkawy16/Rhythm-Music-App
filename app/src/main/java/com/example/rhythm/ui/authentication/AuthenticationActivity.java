@@ -55,10 +55,11 @@ public class AuthenticationActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(FacebookException e) {
-                        Log.d("sssssssssssssssss", "onError: " + e.getLocalizedMessage());
-                        Log.d("sssssssssssssssss", "onError: " + e.getMessage());
-                        Log.d("sssssssssssssssss", "onError: " + e.getCause());
-                        Log.d("sssssssssssssssss", "onError: " + e.getStackTrace());
+                        Log.d("sssssssssssssssss", "onError 1: " + e.getLocalizedMessage());
+                        Log.d("sssssssssssssssss", "onError 2: " + e.getMessage());
+                        Log.d("sssssssssssssssss", "onError 3: " + e.getCause());
+                        Log.d("sssssssssssssssss", "onError 4: " + e.fillInStackTrace().getLocalizedMessage());
+                        Log.d("sssssssssssssssss", "onError 5: " + e.getStackTrace());
                         // App code
                     }
                 });
