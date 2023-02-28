@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.ActivityHomePageBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -29,6 +31,10 @@ public class HomePageActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         //getSupportActionBar().hide();
+
+        if (! Python.isStarted()) {
+            Python.start(new AndroidPlatform(this));
+        }
 
         binding.bottomNavigation.setItemIconTintList(null);
 

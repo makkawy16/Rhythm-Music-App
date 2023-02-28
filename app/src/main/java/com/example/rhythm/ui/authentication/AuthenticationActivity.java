@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.ActivityAuthenticationBinding;
 import com.facebook.CallbackManager;
@@ -29,6 +32,19 @@ public class AuthenticationActivity extends AppCompatActivity {
         binding = ActivityAuthenticationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
        // getSupportActionBar().hide();
+
+        if (! Python.isStarted()) {
+            Python.start(new AndroidPlatform(this));
+        }
+
+        Python py = Python.getInstance();
+        PyObject pyObject = py.getModule("script");
+
+        PyObject obj = null;
+        obj = pyObject.callAttr("main" , "2" , "4");
+
+        Log.d("ssssssssssss", "onCreate: " + obj);
+
 
         callbackManager = CallbackManager.Factory.create();
 
