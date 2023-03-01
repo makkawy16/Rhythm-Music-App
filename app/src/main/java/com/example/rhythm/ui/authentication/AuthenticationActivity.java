@@ -42,7 +42,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         PyObject obj = null;
         obj = pyObject.callAttr("main" , "2" , "4");
-
+        
         Log.d("ssssssssssss", "onCreate: " + obj);
 
 
