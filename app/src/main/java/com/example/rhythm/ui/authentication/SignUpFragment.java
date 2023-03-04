@@ -1,5 +1,7 @@
 package com.example.rhythm.ui.authentication;
 
+import static com.example.rhythm.ui.authentication.AuthenticationActivity.userData;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,8 +33,11 @@ import com.facebook.login.LoginResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,7 +47,7 @@ import java.util.Arrays;
 public class SignUpFragment extends Fragment {
     Utils utils;
     FragmentSignUpBinding binding;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    public static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     String gender;
 
@@ -103,16 +108,35 @@ public class SignUpFragment extends Fragment {
             getActivity().finish();
         }
 
-
         binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
-
+                //handleFacebookAccessToken(AccessToken.getCurrentAccessToken());
 
             }
         });
 
+
+    }
+
+    public static void handleFacebookAccessToken(AccessToken token) {
+        Log.d("tttttttttt", "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("ttttttttttt", "signInWithCredential:success");
+
+
+                        } else
+                            Log.d("ttttttttttt", "signInWithCredential:faild" + task.getException().getLocalizedMessage());
+
+                    }
+                });
 
     }
 
@@ -139,9 +163,11 @@ public class SignUpFragment extends Fragment {
 
     }
 
-    private void addUser() {
+    public void addUser() {
         gender = checkGender();
-        UserModel userModel = new UserModel(binding.fullNameTxt.getText().toString(), binding.emailTxt.getText().toString()
+        UserModel userModel;
+
+        userModel = new UserModel(binding.fullNameTxt.getText().toString(), binding.emailTxt.getText().toString()
                 , binding.passwordTxt.getText().toString(), mAuth.getUid(), binding.dateOfBirth.getText().toString(), gender);
 
         databaseReference.child("users").child(mAuth.getUid()).setValue(userModel)

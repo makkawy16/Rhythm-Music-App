@@ -2,7 +2,14 @@ package com.example.rhythm.data.model;
 
 public class UserModel {
 
-    String name , email , password , id , dateOfBirth , gender;
+    String name , email , password , id , dateOfBirth , gender , phoneNumber ;
+
+    public UserModel(String name, String email, String id, String phoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.id = id;
+        this.phoneNumber = phoneNumber;
+    }
 
     public UserModel(String name, String email, String password, String id, String dateOfBirth, String gender) {
         this.name = name;
@@ -59,5 +66,13 @@ public class UserModel {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

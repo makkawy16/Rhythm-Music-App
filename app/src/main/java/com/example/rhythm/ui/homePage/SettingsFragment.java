@@ -1,6 +1,9 @@
 package com.example.rhythm.ui.homePage;
 
+import static com.example.rhythm.ui.authentication.SignUpFragment.mAuth;
+
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,8 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -38,6 +43,8 @@ public class SettingsFragment extends Fragment {
     SettingsAdapter settingsAdapter;
     List<String> itemName = new ArrayList<>();
     Utils utils = new Utils();
+
+    // FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -101,6 +108,14 @@ public class SettingsFragment extends Fragment {
             });
 
 
+            String username = mAuth.getCurrentUser().getDisplayName();
+
+            if(!username.isEmpty() ){
+                binding.userName.setText(mAuth.getCurrentUser().getDisplayName());
+            }
+
+
+
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             GraphRequest request = GraphRequest.newMeRequest(
                     accessToken,
@@ -113,9 +128,9 @@ public class SettingsFragment extends Fragment {
 
                             try {
                                 if (object != null) {
-                                    String username = object.getString("name");
+                                    /*String username = object.getString("name");
                                     if (!username.isEmpty())
-                                        binding.userName.setText(username);
+                                        binding.userName.setText(username);*/
 
                                     String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
                                     if (!url.isEmpty())
@@ -135,8 +150,8 @@ public class SettingsFragment extends Fragment {
             request.executeAsync();
         } else {
             utils.alertDialog("Error", "No Internet Connection please try again", getContext());
-        }
 
+        }
     }
 
     private void settingsItems() {
