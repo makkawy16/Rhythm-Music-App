@@ -17,4 +17,8 @@
     <item android:title=""
         android:id="@+id/settings_nav"
         android:icon="@drawable/settings_selector"/>
+    <item
+        android:title=""
+        android:id="@+id/generation_nav"
+        android:icon="@drawable/generation_selector"/>
 </menu>

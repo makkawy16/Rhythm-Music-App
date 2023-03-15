@@ -21,6 +21,11 @@
     <string name="facebook_app_id">972504030410642</string>
     <string name="fb_login_protocol_scheme">fb972504030410642</string>
     <string name="facebook_client_token">9c5b8fb3e595e31c0d7c414abdda5cd8</string>
+    <string name="likes">Likes</string>
+    <string name="playlists">Playlists</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="song_name">Song name</string>
 
 
 </resources>

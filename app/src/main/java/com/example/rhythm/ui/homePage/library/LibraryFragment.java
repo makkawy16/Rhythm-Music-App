@@ -1,10 +1,12 @@
-package com.example.rhythm.ui.homePage;
+package com.example.rhythm.ui.homePage.library;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentLibraryBinding;
+import com.example.rhythm.ui.authentication.suggestionFragment;
 
 
 public class LibraryFragment extends Fragment {
@@ -67,5 +70,16 @@ public class LibraryFragment extends Fragment {
 
             }
         });
+
+        binding.LikesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              //  Navigation.findNavController(view).navigate(R.id.action_libraryFragment_to_likesFragment);
+                Fragment fragment = new LikesFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+            }
+        });
+
     }
 }

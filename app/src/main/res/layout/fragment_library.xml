@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.homePage.LibraryFragment">
+    tools:context=".ui.homePage.library.LibraryFragment">
 
+
+    <!-- above buttons -->
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_25sdp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -21,37 +24,60 @@
                 android:id="@+id/playlistsbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cornerRadius="@dimen/_50sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
                 android:backgroundTint="#2b2727"
-                android:text="Playlists"
-                android:textColor="@color/white"
+                android:text="@string/playlists"
                 android:textAllCaps="false"
-                android:layout_marginHorizontal="@dimen/_14sdp"/>
+                android:textColor="@color/white"
+                app:cornerRadius="@dimen/_50sdp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/albumsbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cornerRadius="@dimen/_50sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
                 android:backgroundTint="#2b2727"
-                android:text="Albums"
-                android:textColor="@color/white"
+                android:text="@string/albums"
                 android:textAllCaps="false"
-                android:layout_marginHorizontal="@dimen/_14sdp"/>
+                android:textColor="@color/white"
+                app:cornerRadius="@dimen/_50sdp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/artistsbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cornerRadius="@dimen/_50sdp"
+                android:layout_marginHorizontal="@dimen/_14sdp"
                 android:backgroundTint="#2b2727"
-                android:text="Artists"
-                android:textColor="@color/white"
+                android:text="@string/artists"
                 android:textAllCaps="false"
-                android:layout_marginHorizontal="@dimen/_14sdp"/>
+                android:textColor="@color/white"
+                app:cornerRadius="@dimen/_50sdp" />
 
         </LinearLayout>
 
 
-
     </HorizontalScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gLine"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_1sdp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+
+    <TextView
+        android:id="@+id/LikesBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_like"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="start"
+        android:text="@string/likes"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintTop_toBottomOf="@id/gLine"
+        android:padding="@dimen/_15sdp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

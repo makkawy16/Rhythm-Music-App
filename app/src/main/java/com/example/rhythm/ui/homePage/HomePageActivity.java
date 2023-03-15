@@ -5,18 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.ActivityHomePageBinding;
+import com.example.rhythm.ui.homePage.library.LibraryFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -38,9 +35,7 @@ public class HomePageActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-
-                switch (item.getItemId())
-                {
+                switch (item.getItemId()) {
                     case R.id.home_nav:
                         replaceFragment(new HomeFragment());
                         break;
@@ -53,7 +48,9 @@ public class HomePageActivity extends AppCompatActivity {
                     case R.id.library_nav:
                         replaceFragment(new LibraryFragment());
                         break;
-
+                    case R.id.generation_nav:
+                        Toast.makeText(HomePageActivity.this, "generation", Toast.LENGTH_SHORT).show();
+                        break;
                 }
 
                 return true;
@@ -62,10 +59,10 @@ public class HomePageActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerViewHome,fragment);
+        fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment);
         fragmentTransaction.commit();
     }
 

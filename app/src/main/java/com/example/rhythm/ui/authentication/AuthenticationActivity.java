@@ -43,7 +43,6 @@ public class AuthenticationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAuthenticationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // getSupportActionBar().hide();
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -51,8 +50,6 @@ public class AuthenticationActivity extends AppCompatActivity {
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        // Navigation.findNavController(new SignUpFragment().getView()).navigate(R.id.action_signUpFragment_to_suggestionFragment);
                         Log.d("ssssssssss", "onSuccess: Activity " + loginResult.toString());
 
                         handleFacebookAccessToken(loginResult.getAccessToken());

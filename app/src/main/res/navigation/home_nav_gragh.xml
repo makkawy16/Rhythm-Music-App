@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.example.rhythm.ui.homePage.LibraryFragment"
+        android:name="com.example.rhythm.ui.homePage.library.LibraryFragment"
         android:label="fragment_library"
         tools:layout="@layout/fragment_library" >
         <action
@@ -61,5 +61,17 @@
         <action
             android:id="@+id/action_libraryFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_likesFragment"
+            app:destination="@id/likesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.example.rhythm.ui.homePage.library.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" >
+        <action
+            android:id="@+id/action_likesFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
     </fragment>
 </navigation>
