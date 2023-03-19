@@ -43,38 +43,20 @@ public class SettingsFragment extends Fragment {
     SettingsAdapter settingsAdapter;
     List<String> itemName = new ArrayList<>();
     Utils utils = new Utils();
+    String username;
 
     // FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-
-    private String mParam1;
-    private String mParam2;
 
     public SettingsFragment() {
         // Required empty public constructor
     }
 
 
-    // TODO: Rename and change types and number of parameters
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
 
     }
 
@@ -102,18 +84,11 @@ public class SettingsFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     LoginManager.getInstance().logOut();
+                    mAuth.signOut();
                     startActivity(new Intent(getActivity(), AuthenticationActivity.class));
                     getActivity().finish();
                 }
             });
-
-
-            String username = mAuth.getCurrentUser().getDisplayName();
-
-            if(!username.isEmpty() ){
-                binding.userName.setText(mAuth.getCurrentUser().getDisplayName());
-            }
-
 
 
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -128,9 +103,17 @@ public class SettingsFragment extends Fragment {
 
                             try {
                                 if (object != null) {
-                                    /*String username = object.getString("name");
+                                    String username = object.getString("name");
                                     if (!username.isEmpty())
-                                        binding.userName.setText(username);*/
+                                        binding.userName.setText(username);
+
+
+                                 /*   username = mAuth.getCurrentUser().getDisplayName();
+
+                                    if(!username.isEmpty() ){
+                                        binding.userName.setText(mAuth.getCurrentUser().getDisplayName());
+                                    }*/
+
 
                                     String url = object.getJSONObject("picture").getJSONObject("data").getString("url");
                                     if (!url.isEmpty())

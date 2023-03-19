@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.ActivityHomePageBinding;
 import com.example.rhythm.ui.homePage.library.LibraryFragment;
+import com.example.rhythm.utils.SpConnect;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class HomePageActivity extends AppCompatActivity {
@@ -57,6 +58,13 @@ public class HomePageActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+       /* SpConnect spConnect = new SpConnect();
+        spConnect.inOnStart(this);*/
     }
 
     private void replaceFragment(Fragment fragment) {

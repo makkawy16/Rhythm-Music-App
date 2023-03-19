@@ -1,7 +1,13 @@
-package com.example.rhythm.data.model;
+package com.example.rhythm.data.model.artists;
+
+import com.google.gson.annotations.SerializedName;
 
 public class Followers{
+
+	@SerializedName("total")
 	private int total;
+
+	@SerializedName("href")
 	private Object href;
 
 	public int getTotal(){

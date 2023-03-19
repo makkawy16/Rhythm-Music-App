@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,11 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rhythm.R;
-import com.example.rhythm.data.model.ArtistsResponse;
+import com.example.rhythm.data.model.artists.ArtistsItem;
+import com.example.rhythm.data.model.artists.ArtistsResponse;
 import com.example.rhythm.databinding.FragmentSuggestionBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
+import com.example.rhythm.ui.adapter.SingerSuggestAdapter;
 import com.example.rhythm.ui.homePage.HomePageActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,7 +33,10 @@ public class suggestionFragment extends Fragment {
 
 
     FragmentSuggestionBinding binding;
+    SingerSuggestAdapter singerSuggestAdapter;
+    List<ArtistsItem> artistList = new ArrayList<>();
 
+    String artistsIDs = "2GVksDv9UpY60i4CvytrZK,5abSRg0xN1NV3gLbuvX24M";
 
 
     public suggestionFragment() {
@@ -57,19 +64,22 @@ public class suggestionFragment extends Fragment {
 
 
         RetrofitClient.getWepService()
-                        .getArtists("5abSRg0xN1NV3gLbuvX24M")
-                                .enqueue(new Callback<ArtistsResponse>() {
-                                    @Override
-                                    public void onResponse(Call<ArtistsResponse> call, Response<ArtistsResponse> response) {
-                                        Log.d("dddddddddd", "onResponse: " +response.body());
-                                    }
+                .getArtists("2GVksDv9UpY60i4CvytrZK,5abSRg0xN1NV3gLbuvX24M,4U7K3Xm1CXe5FpBGYUcHUZ,4l7F7EEXy93Jr0uIITY7bN")
+                .enqueue(new Callback<ArtistsResponse>() {
+                    @Override
+                    public void onResponse(Call<ArtistsResponse> call, Response<ArtistsResponse> response) {
+                        Log.d("ssssssssssss", "onResponse: " +response.body());
+                        Log.d("ssssssssssss", "onResponse: " +response.body().getArtists().get(0).getName());
+                       // singerSuggestAdapter.addArtist(response.body().getArtists());
+                        artistList.addAll(response.body().getArtists());
+                        initialSuggestRecycler();
+                    }
 
-                                    @Override
-                                    public void onFailure(Call<ArtistsResponse> call, Throwable t) {
-                                        Log.d("ddddddddd", "onFailure: " + t.getLocalizedMessage());
-                                    }
-
-    });
+                    @Override
+                    public void onFailure(Call<ArtistsResponse> call, Throwable t) {
+                        Log.d("sssssssssss", "onFailure: " + t.getLocalizedMessage());
+                    }
+                });
 
 
         binding.nextBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,5 +89,14 @@ public class suggestionFragment extends Fragment {
                 getActivity().finish();
             }
         });
+    }
+
+    private void initialSuggestRecycler() {
+
+        singerSuggestAdapter = new SingerSuggestAdapter(artistList,getContext());
+        binding.singerRecylcer.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.singerRecylcer.setAdapter(singerSuggestAdapter);
+
+
     }
 }

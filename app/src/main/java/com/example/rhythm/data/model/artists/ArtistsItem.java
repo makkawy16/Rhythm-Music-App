@@ -1,17 +1,38 @@
-package com.example.rhythm.data.model;
+package com.example.rhythm.data.model.artists;
 
 import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
-public class ArtistsResponse{
+public class ArtistsItem{
+
+	@SerializedName("images")
 	private List<ImagesItem> images;
+
+	@SerializedName("followers")
 	private Followers followers;
+
+	@SerializedName("genres")
 	private List<String> genres;
+
+	@SerializedName("popularity")
 	private int popularity;
+
+	@SerializedName("name")
 	private String name;
+
+	@SerializedName("href")
 	private String href;
+
+	@SerializedName("id")
 	private String id;
+
+	@SerializedName("type")
 	private String type;
+
+	@SerializedName("external_urls")
 	private ExternalUrls externalUrls;
+
+	@SerializedName("uri")
 	private String uri;
 
 	public List<ImagesItem> getImages(){

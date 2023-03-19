@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.data.model.UserModel;
 import com.example.rhythm.databinding.ActivityAuthenticationBinding;
+import com.example.rhythm.utils.SpConnect;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -28,6 +29,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.spotify.sdk.android.auth.AuthorizationClient;
+import com.spotify.sdk.android.auth.AuthorizationResponse;
 
 
 public class AuthenticationActivity extends AppCompatActivity {
@@ -36,6 +39,9 @@ public class AuthenticationActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     public static FirebaseUser userData;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private static final int REQUEST_CODE = 1337;
+
+    public static String accessToken = "";
 
 
     @Override
@@ -58,8 +64,9 @@ public class AuthenticationActivity extends AppCompatActivity {
                         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
 
+
                         userData = mAuth.getCurrentUser();
-                        addUSerData();
+                        //    addUSerData();
 
 
                     }
@@ -82,12 +89,46 @@ public class AuthenticationActivity extends AppCompatActivity {
                     }
                 });
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SpConnect spConnect = new SpConnect();
+        spConnect.inOnStart(this);
+
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
+
+            switch (response.getType()) {
+                // Response was successful and contains auth token
+                case TOKEN:
+                    // Handle successful response
+                    Log.d("sssssssssss", "onActivityResult:  access token " + response.getAccessToken());
+                    accessToken = response.getAccessToken();
+                    break;
+
+                // Auth flow returned an error
+                case ERROR:
+                    // Handle error response
+                    break;
+
+                // Most likely auth flow was cancelled
+                default:
+                    // Handle other cases
+            }
+        }
+
+
     }
 
     private void addUSerData() {
