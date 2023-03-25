@@ -15,14 +15,25 @@ import android.view.ViewGroup;
 
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.FragmentSongPlayerBinding;
+import com.squareup.picasso.Picasso;
 
 public class SongPlayerFragment extends Fragment {
 
     FragmentSongPlayerBinding binding;
+    String songName;
+    String imageUrl;
+    String artistName;
+
+    public SongPlayerFragment(String songName, String imageUrl, String artistName) {
+        this.songName = songName;
+        this.imageUrl = imageUrl;
+        this.artistName = artistName;
+    }
 
     public SongPlayerFragment() {
         // Required empty public constructor
     }
+
 
 
     @Override
@@ -47,6 +58,11 @@ public class SongPlayerFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             binding.backgroundImage.setRenderEffect(RenderEffect.createBlurEffect(80,80, Shader.TileMode.MIRROR));
         }
+
+        binding.songName.setText(songName);
+        Picasso.get().load(imageUrl).into(binding.backgroundImage);
+        Picasso.get().load(imageUrl).into(binding.songimage);
+        binding.artistName.setText(artistName);
 
     }
 }

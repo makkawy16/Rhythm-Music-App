@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavAction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -19,7 +21,10 @@ import com.example.rhythm.data.model.search.SearchResponseItem;
 import com.example.rhythm.data.model.search.Tracks;
 import com.example.rhythm.databinding.FragmentSearchBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
+import com.example.rhythm.ui.adapter.OnSearchItemCLick;
 import com.example.rhythm.ui.adapter.SearchAdapter;
+import com.example.rhythm.ui.homePage.library.LikesFragment;
+import com.example.rhythm.ui.homePage.library.SongPlayerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +35,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment  {
 
     FragmentSearchBinding binding;
     SearchAdapter searchAdapter;
@@ -60,6 +65,7 @@ public class SearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentSearchBinding.bind(view);
 
+
         binding.searchtxt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -79,6 +85,15 @@ public class SearchFragment extends Fragment {
 
     }
 
+
+    OnSearchItemCLick onsearchCLick= new OnSearchItemCLick() {
+        @Override
+        public void onItemSearchedCLiked(String songName, String url , String artistName) {
+            Fragment fragment = new SongPlayerFragment(songName,url,artistName);
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+        }
+    };
 
     private void getSearch(String searchText) {
 
@@ -107,11 +122,14 @@ public class SearchFragment extends Fragment {
 
 
     private void initRecycler() {
-        searchAdapter = new SearchAdapter(searchItems, getContext());
+        searchAdapter = new SearchAdapter(searchItems, getContext(),onsearchCLick);
         binding.recyclerSearchResult.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.recyclerSearchResult.setAdapter(searchAdapter);
 
     }
+
+
+
 
 
 }
