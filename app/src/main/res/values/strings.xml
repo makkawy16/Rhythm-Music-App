@@ -26,6 +26,7 @@
     <string name="albums">Albums</string>
     <string name="artists">Artists</string>
     <string name="song_name">Song name</string>
+    <string name="now_playing">Now Playing</string>
 
 
 </resources>

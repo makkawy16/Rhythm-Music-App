@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav_gragh"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/songPlayerFragment">
 
     <fragment
         android:id="@+id/homeFragment"
@@ -73,5 +73,17 @@
         <action
             android:id="@+id/action_likesFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_likesFragment_to_songPlayerFragment"
+            app:destination="@id/songPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songPlayerFragment"
+        android:name="com.example.rhythm.ui.homePage.library.SongPlayerFragment"
+        android:label="fragment_song_player"
+        tools:layout="@layout/fragment_song_player" >
+        <action
+            android:id="@+id/action_songPlayerFragment_to_likesFragment"
+            app:destination="@id/likesFragment" />
     </fragment>
 </navigation>
