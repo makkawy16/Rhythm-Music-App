@@ -2,59 +2,50 @@ package com.example.rhythm.ui.homePage;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rhythm.R;
+import com.example.rhythm.data.model.search.ItemsItem;
+import com.example.rhythm.data.model.search.SearchResponseItem;
+import com.example.rhythm.data.model.search.Tracks;
+import com.example.rhythm.databinding.FragmentSearchBinding;
+import com.example.rhythm.source.remote.RetrofitClient;
+import com.example.rhythm.ui.adapter.SearchAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+
 public class SearchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    FragmentSearchBinding binding;
+    SearchAdapter searchAdapter;
+    List<ItemsItem> searchItems = new ArrayList<>();
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -63,4 +54,64 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding = FragmentSearchBinding.bind(view);
+
+        binding.searchtxt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchItems.clear();
+                getSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchItems.clear();
+                getSearch(newText);
+
+                return true;
+            }
+        });
+
+    }
+
+
+    private void getSearch(String searchText) {
+
+        RetrofitClient.getWepService().search(searchText, "track", 15)
+                .enqueue(new Callback<SearchResponseItem>() {
+                    @Override
+                    public void onResponse(Call<SearchResponseItem> call, Response<SearchResponseItem> response) {
+
+                        if (response.body() != null) {
+                            Log.d("sssssssssssss", "onResponse: search  " + response.body());
+                            Log.d("sssssssssssss", "onResponse: search  " + response.body().getTracks().getItems().get(0).getName());
+
+
+                            searchItems.addAll(response.body().getTracks().getItems());
+                            initRecycler();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SearchResponseItem> call, Throwable t) {
+                        Log.d("sssssssssssss", "onFailure: search  " + t.getLocalizedMessage());
+                    }
+                });
+
+    }
+
+
+    private void initRecycler() {
+        searchAdapter = new SearchAdapter(searchItems, getContext());
+        binding.recyclerSearchResult.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.recyclerSearchResult.setAdapter(searchAdapter);
+
+    }
+
+
 }
