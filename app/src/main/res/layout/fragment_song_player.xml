@@ -6,25 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.homePage.library.SongPlayerFragment">
 
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/elish_background"
-    android:scaleType="fitXY"
-    android:id="@+id/background_image"/>
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/elish_background" />
 
 
-
-        <ImageView
-            android:id="@+id/backbtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/left_arrow" />
-
+    <ImageView
+        android:id="@+id/backbtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:src="@drawable/left_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <RelativeLayout
@@ -32,8 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginTop="@dimen/_60sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.imageview.ShapeableImageView
 
@@ -45,103 +42,110 @@
             app:shapeAppearanceOverlay="@style/rounded_image" />
 
 
-
     </RelativeLayout>
 
     <TextView
         android:id="@+id/song_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
         android:text="song name"
         android:textColor="@color/white"
         android:textSize="@dimen/_22ssp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/layout_for_image"
-        android:gravity="start"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_marginHorizontal="20dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/layout_for_image" />
+
     <TextView
         android:id="@+id/artist_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="1"
         android:text="artist name"
         android:textColor="@color/hint_txt_color"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/song_name"
-        android:gravity="start"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_marginHorizontal="20dp"
-        />
+        app:layout_constraintTop_toBottomOf="@id/song_name" />
+
+    <!-- if liked change W/H to 25 -->
+
+    <ImageView
+        android:id="@+id/like_btn"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_like"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_for_image" />
 
 
-
-
- <!--bottom layout-->
+    <!--bottom layout-->
     <RelativeLayout
         android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/_18ssp"
-        android:background="@drawable/gredient">
+        android:background="@drawable/gredient"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/shuffle"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_shuffle_com"
-            android:layout_marginStart="25dp"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:src="@drawable/ic_shuffle_com"
             app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/previous"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:tintMode="@color/white"
             android:layout_centerVertical="true"
             android:layout_marginEnd="25dp"
             android:layout_toStartOf="@id/play_pause"
-            android:src="@drawable/ic_skip_previous" />
+            android:src="@drawable/ic_skip_previous"
+            android:tintMode="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/play_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:tintMode="@color/white"
             android:backgroundTint="@color/material_dynamic_neutral80"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/play_arrow" />
+            android:src="@drawable/play_arrow"
+            android:tintMode="@color/white" />
 
         <ImageView
             android:id="@+id/next"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:tintMode="@color/white"
-            android:src="@drawable/ic_skip_next"
             android:layout_marginStart="25dp"
             android:layout_toEndOf="@id/play_pause"
-            />
+            android:src="@drawable/ic_skip_next"
+            android:tintMode="@color/white" />
+
         <ImageView
             android:id="@+id/repeat"
             android:layout_width="35dp"
-            android:tintMode="@color/white"
             android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_repeat"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="25dp"
-            />
-
-
+            android:src="@drawable/ic_repeat"
+            android:tintMode="@color/white" />
 
 
     </RelativeLayout>
@@ -149,28 +153,28 @@
 
     <!-- seek bar-->
     <RelativeLayout
+        android:id="@+id/seek_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_layout"
-        android:id="@+id/seek_bar_layout"
-        >
+        app:layout_constraintBottom_toTopOf="@id/bottom_layout">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1:28"
             android:id="@+id/duration_played"
-            android:textColor="@color/black"
-            android:layout_marginStart="12dp"
-            android:layout_alignParentStart="true"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4:28"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="12dp"
+            android:text="1:28"
+            android:textColor="@color/black" />
+
+        <TextView
             android:id="@+id/duration_total"
-            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginEnd="12dp"
-            android:layout_alignParentEnd="true"/>
+            android:text="4:28"
+            android:textColor="@color/black" />
 
         <SeekBar
             android:id="@+id/seek_bar"
@@ -178,31 +182,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
-            android:thumbTint="@color/white"
-            android:progressTint="@color/white"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="15dp" />
+            android:layout_marginBottom="15dp"
+            android:progressTint="@color/white"
+            android:thumbTint="@color/white" />
 
     </RelativeLayout>
-
 
 
     <RelativeLayout
         android:id="@+id/bottom_layout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/bottom_layout"
+        android:background="@drawable/gredient_all"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/gredient_all">
+        app:layout_constraintTop_toBottomOf="@id/bottom_layout">
 
 
     </RelativeLayout>
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
