@@ -88,11 +88,13 @@ public class SearchFragment extends Fragment  {
 
     OnSearchItemCLick onsearchCLick= new OnSearchItemCLick() {
         @Override
-        public void onItemSearchedCLiked(String songName, String url , String artistName) {
-            Fragment fragment = new SongPlayerFragment(songName,url,artistName);
+        public void onItemSearchedCLiked(String songName, String url, String artistName, ItemsItem itemsItem) {
+            Fragment fragment = new SongPlayerFragment(songName,url,artistName , itemsItem);
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
         }
+
+
     };
 
     private void getSearch(String searchText) {

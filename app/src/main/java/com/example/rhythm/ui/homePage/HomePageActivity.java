@@ -21,8 +21,11 @@ import com.example.rhythm.ui.homePage.library.LibraryFragment;
 import com.example.rhythm.utils.SpConnect;
 import com.facebook.CallbackManager;
 import com.google.android.material.navigation.NavigationBarView;
+import com.spotify.android.appremote.api.SpotifyAppRemote;
 import com.spotify.sdk.android.auth.AuthorizationClient;
+import com.spotify.sdk.android.auth.AuthorizationHandler;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
+import com.spotify.sdk.android.auth.app.SpotifyAuthHandler;
 
 public class HomePageActivity extends AppCompatActivity {
     ActivityHomePageBinding binding;
@@ -40,6 +43,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         binding.bottomNavigation.setItemIconTintList(null);
         callbackManager = CallbackManager.Factory.create();
+
 
 
         binding.bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

@@ -72,7 +72,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/song_name" />
 
-    <!-- if liked change W/H to 25 -->
+    <!-- if liked change W/H to 25 and icon to red  -->
 
     <ImageView
         android:id="@+id/like_btn"
