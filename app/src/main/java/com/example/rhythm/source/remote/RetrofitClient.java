@@ -14,7 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class RetrofitClient {
 
     private final static String BASE_URL = "https://api.spotify.com/v1/";
+    private final static String BASE_URL2 = "https://ml-rec.herokuapp.com/";
     private static Retrofit retrofit;
+    private static Retrofit retrofit2;
 
     public static WebService getWepService() {
         if (retrofit == null) {
@@ -40,6 +42,19 @@ public abstract class RetrofitClient {
                     .build();
 
         }
-        return  retrofit.create(WebService.class);
+        return retrofit.create(WebService.class);
     }
+
+    public static WebService getRecommendationWebService() {
+        if (retrofit2 == null) {
+
+            retrofit2 = new Retrofit.Builder()
+                    .baseUrl(BASE_URL2)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+        }
+        return retrofit2.create(WebService.class);
+    }
+
 }

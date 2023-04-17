@@ -1,5 +1,6 @@
 package com.example.rhythm.ui.homePage;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.example.rhythm.ui.adapter.OnSearchItemCLick;
 import com.example.rhythm.ui.adapter.SearchAdapter;
 import com.example.rhythm.ui.homePage.library.LikesFragment;
 import com.example.rhythm.ui.homePage.library.SongPlayerFragment;
+import com.example.rhythm.ui.songPlayer.SongPlayerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +91,20 @@ public class SearchFragment extends Fragment  {
     OnSearchItemCLick onsearchCLick= new OnSearchItemCLick() {
         @Override
         public void onItemSearchedCLiked(String songName, String url, String artistName, ItemsItem itemsItem) {
-            Fragment fragment = new SongPlayerFragment(songName,url,artistName , itemsItem);
+          /*  Fragment fragment = new SongPlayerFragment(songName,url,artistName , itemsItem);
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+            fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();*/
+
+            Intent intent = new Intent(getActivity(), SongPlayerActivity.class);
+            Bundle bundle = new Bundle();
+            //bundle.putSerializable("songItem" , itemsItem);
+            intent.putExtra("songName" , songName);
+            intent.putExtra("imageUrl" , url);
+            intent.putExtra("artistName" , artistName);
+            intent.putExtra("songurl" , itemsItem.getPreviewUrl());
+            //intent.putExtras(bundle);
+            startActivity(intent);
+
         }
 
 

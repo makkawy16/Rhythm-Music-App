@@ -2,7 +2,9 @@ package com.example.rhythm.data.model.search;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ArtistsItem{
+import java.io.Serializable;
+
+public class ArtistsItem implements Serializable {
 
 	@SerializedName("name")
 	private String name;

@@ -12,13 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_16sdp"
-        android:text="Welcome"
+        android:text="@string/welcome_txt"
         android:textColor="@color/white"
         android:textSize="@dimen/_35sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
+        android:id="@+id/horizontal_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
@@ -36,7 +37,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/_8sdp"
-                android:text="All"
+                android:text="@string/all_txt"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -47,7 +48,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/_8sdp"
-                android:text="New"
+                android:text="@string/new_txt"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -58,7 +59,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/_8sdp"
-                android:text="Popular"
+                android:text="@string/popular"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -69,7 +70,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/_8sdp"
-                android:text="Charts"
+                android:text="@string/charts"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -80,7 +81,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:padding="@dimen/_8sdp"
-                android:text="Favourites"
+                android:text="@string/favourites"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp" />
 
@@ -88,5 +89,44 @@
         </LinearLayout>
     </HorizontalScrollView>
 
+    <TextView
+        android:id="@+id/forYouText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_12sdp"
+        android:text="@string/for_you"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontal_layout" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/forYouSongRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/forYouText"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_home_song" />
+
+
+    <TextView
+        android:id="@+id/NewReleasetxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_12sdp"
+        android:text="@string/new_releases"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/forYouSongRecycler" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newReleaseSongRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/NewReleasetxt"
+        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_home_song" />
 </androidx.constraintlayout.widget.ConstraintLayout>

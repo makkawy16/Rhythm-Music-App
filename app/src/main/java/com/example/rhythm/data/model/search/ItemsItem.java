@@ -1,9 +1,10 @@
 package com.example.rhythm.data.model.search;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class ItemsItem{
+public class ItemsItem implements Serializable {
 
 	@SerializedName("disc_number")
 	private int discNumber;

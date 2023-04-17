@@ -4,7 +4,7 @@
     package="com.example.rhythm">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -17,17 +17,14 @@
         android:theme="@style/Theme.Rhythm"
         tools:targetApi="31">
         <activity
+            android:name=".ui.songPlayer.SongPlayerActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.homePage.HomePageActivity"
-            android:exported="true">
-
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.authentication.AuthenticationActivity"
             android:exported="true">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +38,6 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
-
     </application>
 
 </manifest>
