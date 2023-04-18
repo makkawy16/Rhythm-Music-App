@@ -12,14 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rhythm.R;
 import com.example.rhythm.data.model.artists.ArtistsItem;
 import com.example.rhythm.data.model.artists.ArtistsResponse;
 import com.example.rhythm.databinding.FragmentSuggestionBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
+import com.example.rhythm.ui.adapter.OnSingerItemClicked;
 import com.example.rhythm.ui.adapter.SingerSuggestAdapter;
 import com.example.rhythm.ui.homePage.HomePageActivity;
+import com.example.rhythm.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +38,10 @@ public class suggestionFragment extends Fragment {
     FragmentSuggestionBinding binding;
     SingerSuggestAdapter singerSuggestAdapter;
     List<ArtistsItem> artistList = new ArrayList<>();
+    OnSingerItemClicked singerItemClicked;
+    List<String> singerNames = new ArrayList<>();
+    Utils utils = new Utils();
+    String selectedNames = "";
 
     String artistsIDs = "2GVksDv9UpY60i4CvytrZK,5abSRg0xN1NV3gLbuvX24M";
 
@@ -63,14 +70,54 @@ public class suggestionFragment extends Fragment {
         binding = FragmentSuggestionBinding.bind(view);
 
 
+        singerItemClicked = new OnSingerItemClicked() {
+            @Override
+            public void onSingerClicked(String artistName) {
+
+                if (!singerNames.contains(artistName))
+                    singerNames.add(artistName);
+                selectedNames =  artistName+ ","+selectedNames;
+            }
+        };
+        showArtists();
+
+        binding.nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (singerNames.size() < 3)
+                    utils.alertDialog("Something Missed", "You Should Select at least Three Artists ", getContext());
+                else {
+                    Intent intent = new Intent(getActivity(), HomePageActivity.class);
+                    intent.putExtra("artistsNames" , selectedNames);
+                    startActivity(intent);
+                    getActivity().finish();
+                  //  utils.alertDialog("show singers", selectedNames, getContext());
+
+                }
+            }
+        });
+    }
+
+    private void initialSuggestRecycler() {
+
+        singerSuggestAdapter = new SingerSuggestAdapter(artistList, getContext(), singerItemClicked);
+        binding.singerRecylcer.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.singerRecylcer.setAdapter(singerSuggestAdapter);
+
+
+    }
+
+    private void showArtists() {
         RetrofitClient.getWepService()
                 .getArtists("2GVksDv9UpY60i4CvytrZK,5abSRg0xN1NV3gLbuvX24M,4U7K3Xm1CXe5FpBGYUcHUZ,4l7F7EEXy93Jr0uIITY7bN")
                 .enqueue(new Callback<ArtistsResponse>() {
                     @Override
                     public void onResponse(Call<ArtistsResponse> call, Response<ArtistsResponse> response) {
-                        Log.d("ssssssssssss", "onResponse: " +response.body());
-                        Log.d("ssssssssssss", "onResponse: " +response.body().getArtists().get(0).getName());
-                       // singerSuggestAdapter.addArtist(response.body().getArtists());
+                        Log.d("ssssssssssss", "onResponse: " + response.body());
+                        Log.d("ssssssssssss", "onResponse: " + response.body().getArtists().get(0).getName());
+                        // singerSuggestAdapter.addArtist(response.body().getArtists());
                         artistList.addAll(response.body().getArtists());
                         initialSuggestRecycler();
                     }
@@ -80,23 +127,5 @@ public class suggestionFragment extends Fragment {
                         Log.d("sssssssssss", "onFailure: " + t.getLocalizedMessage());
                     }
                 });
-
-
-        binding.nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), HomePageActivity.class));
-                getActivity().finish();
-            }
-        });
-    }
-
-    private void initialSuggestRecycler() {
-
-        singerSuggestAdapter = new SingerSuggestAdapter(artistList,getContext());
-        binding.singerRecylcer.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.singerRecylcer.setAdapter(singerSuggestAdapter);
-
-
     }
 }

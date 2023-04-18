@@ -26,6 +26,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
     FragmentHomeBinding binding;
+    String artistsSelected;
 
 
     public HomeFragment() {
@@ -50,6 +51,12 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding = FragmentHomeBinding.bind(view);
+
+   artistsSelected = getActivity().getIntent().getStringExtra("artistsNames");
+
+        Log.d("sssssssssssssssssssss", "onViewCreated:  artists names" +artistsSelected);
+
+
 
         RetrofitClient.getRecommendationWebService()
                 .firstRecommend("amr diab,cairokee")
