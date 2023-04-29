@@ -8,7 +8,10 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.SeekBar;
 
 import com.example.rhythm.R;
 import com.example.rhythm.data.model.search.ItemsItem;
@@ -25,6 +28,9 @@ public class SongPlayerActivity extends AppCompatActivity {
     String imageUrl;
     String songUrl;
     MediaPlayer mediaPlayer = new MediaPlayer();
+    boolean songPlaying = false;
+    private Handler handler = new Handler();
+
 
 
     @Override
@@ -48,6 +54,7 @@ public class SongPlayerActivity extends AppCompatActivity {
         Picasso.get().load(imageUrl).into(binding.backgroundImage);
         Picasso.get().load(imageUrl).into(binding.songimage);
 
+
         try {
             //   mediaPlayer.setDataSource(getContext(), Uri.parse("spotify:track:1IhGkxXcW4vFBR9dHP5To9"));
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -58,12 +65,78 @@ public class SongPlayerActivity extends AppCompatActivity {
             mediaPlayer.setDataSource(songUrl);
             mediaPlayer.prepare();
             mediaPlayer.start();
+            songPlaying = true;
+            binding.seekBar.setMax(mediaPlayer.getDuration()/1000);
 
         } catch (IOException e) {
             e.printStackTrace();
             Log.d("ssssssssssss", "onViewCreated:  media player  " + e.getLocalizedMessage());
         }
 
+        binding.playPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (songPlaying) {
+                    binding.playPause.setImageResource(R.drawable.play_arrow);
+                    mediaPlayer.pause();
+                    songPlaying = false;
 
+                } else {
+                    binding.playPause.setImageResource(R.drawable.ic_pause);
+                    mediaPlayer.start();
+                    songPlaying = true;
+                }
+            }
+        });
+
+        binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mediaPlayer.seekTo(progress*1000);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        SongPlayerActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(mediaPlayer != null)
+                {
+                    int currentPosition = mediaPlayer.getCurrentPosition()/1000;
+                    binding.seekBar.setProgress(currentPosition);
+                    binding.durationPlayed.setText(formattedTime(currentPosition));
+
+                }
+                handler.postDelayed(this , 1); //oneSecond
+            }
+        });
+
+
+    }
+
+
+    private String formattedTime(int currentPosition) {
+
+        String totalout = "";
+        String totalNew = "";
+        String seconds = String.valueOf(currentPosition %60);
+        String minutes = String.valueOf(currentPosition/60);
+        totalout = minutes + ":" + seconds;
+        totalNew = minutes + ":" + "0" + seconds;
+        if(seconds.length() ==1 ){
+            return totalNew;
+        }
+        else {
+            return totalout;
+        }
     }
 }
