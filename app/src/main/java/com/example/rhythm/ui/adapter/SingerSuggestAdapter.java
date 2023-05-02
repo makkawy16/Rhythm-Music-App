@@ -29,8 +29,7 @@ public class SingerSuggestAdapter extends RecyclerView.Adapter<SingerSuggestAdap
 
     }
 
-    public SingerSuggestAdapter() {
-    }
+
 
     public SingerSuggestAdapter(List<ArtistsItem> artistsList, Context context, OnSingerItemClicked singerItemClicked) {
         this.artistsList = artistsList;

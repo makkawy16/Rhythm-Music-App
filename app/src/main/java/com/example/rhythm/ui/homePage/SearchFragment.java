@@ -118,8 +118,8 @@ public class SearchFragment extends Fragment  {
                     public void onResponse(Call<SearchResponseItem> call, Response<SearchResponseItem> response) {
 
                         if (response.body() != null) {
-                            Log.d("sssssssssssss", "onResponse: search  " + response.body());
-                            Log.d("sssssssssssss", "onResponse: search  " + response.body().getTracks().getItems().get(0).getName());
+                           /* Log.d("sssssssssssss", "onResponse: search  " + response.body());
+                            Log.d("sssssssssssss", "onResponse: search  " + response.body().getTracks().getItems().get(0).getName());*/
 
 
                             searchItems.addAll(response.body().getTracks().getItems());

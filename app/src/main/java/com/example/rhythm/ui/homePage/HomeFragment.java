@@ -1,7 +1,7 @@
 package com.example.rhythm.ui.homePage;
 
-import static androidx.recyclerview.widget.RecyclerView.*;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,7 +32,10 @@ public class HomeFragment extends Fragment {
 
     FragmentHomeBinding binding;
     String artistsSelected;
-    HomeSongAdapter homeSongAdapter;
+    HomeSongAdapter homeSongAdapterRecomm;
+    HomeSongAdapter homeSongAdapterNew;
+
+    String selectedFromShared;
 
 
     public HomeFragment() {
@@ -58,21 +61,25 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.bind(view);
         songRecycler();
+        SharedPreferences shared = getActivity().
+                getSharedPreferences(  "myShared" ,
+                Context .MODE_PRIVATE);
+        selectedFromShared = shared.getString(  "names",  "no value here");
 
    artistsSelected = getActivity().getIntent().getStringExtra("artistsNames");
 
-        Log.d("sssssssssssssssssssss", "onViewCreated:  artists names" +artistsSelected);
+        Log.d("sssssssssssssssssssss", "onViewCreated:  artists names   shared  " +selectedFromShared);
 
 
 
         RetrofitClient.getRecommendationWebService()
-                .firstRecommend("amr diab,cairokee")
+                .firstRecommend(selectedFromShared)
                 .enqueue(new Callback<List<RecommendationResponseItem>>() {
                     @Override
                     public void onResponse(Call<List<RecommendationResponseItem>> call, Response<List<RecommendationResponseItem>> response) {
-                        Log.d("sssssssssssssss", "onResponse: recommend " + response.body());
-                        Log.d("sssssssssssssss", "onResponse: recommend " + response.body().get(1).getName());
-                        homeSongAdapter.addRecommendedSongs(response.body());
+                       /* Log.d("sssssssssssssss", "onResponse: recommend " + response.body());
+                        Log.d("sssssssssssssss", "onResponse: recommend " + response.body().get(1).getName());*/
+                        homeSongAdapterRecomm.addRecommendedSongs(response.body());
                     }
 
                     @Override
@@ -88,11 +95,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void songRecycler(){
-        homeSongAdapter = new HomeSongAdapter(getContext());
+        homeSongAdapterRecomm = new HomeSongAdapter(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         binding.forYouSongRecycler.setLayoutManager(linearLayoutManager);
-        binding.forYouSongRecycler.setAdapter(homeSongAdapter);
+        binding.forYouSongRecycler.setAdapter(homeSongAdapterRecomm);
     }
 
 }
