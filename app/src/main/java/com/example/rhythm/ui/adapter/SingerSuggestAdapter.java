@@ -2,7 +2,9 @@ package com.example.rhythm.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,20 +19,22 @@ public class SingerSuggestAdapter extends RecyclerView.Adapter<SingerSuggestAdap
 
     List<ArtistsItem> artistsList;
     Context context;
+    OnSingerItemClicked singerItemClicked;
+    private int checkedPosition = 0; //-1 no selection  0 first item selected
 
 
-    public void addArtist(List<ArtistsItem> artistsList){
+    public void addArtist(List<ArtistsItem> artistsList) {
         this.artistsList = artistsList;
         notifyDataSetChanged();
 
     }
 
-    public SingerSuggestAdapter() {
-    }
 
-    public SingerSuggestAdapter(List<ArtistsItem> artistsList, Context context) {
+
+    public SingerSuggestAdapter(List<ArtistsItem> artistsList, Context context, OnSingerItemClicked singerItemClicked) {
         this.artistsList = artistsList;
         this.context = context;
+        this.singerItemClicked = singerItemClicked;
     }
 
     @NonNull
@@ -50,6 +54,15 @@ public class SingerSuggestAdapter extends RecyclerView.Adapter<SingerSuggestAdap
 
         holder.binding.artistname.setText(artists.getName());
         Picasso.get().load(artists.getImages().get(1).getUrl()).into(holder.binding.artistimage);
+
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, ""+artists.getName(), Toast.LENGTH_SHORT).show();
+                holder.binding.selectedIcon.setVisibility(View.VISIBLE);
+                singerItemClicked.onSingerClicked(artists.getName());
+            }
+        });
     }
 
     @Override
@@ -64,7 +77,9 @@ public class SingerSuggestAdapter extends RecyclerView.Adapter<SingerSuggestAdap
 
             super(binding.getRoot());
             this.binding = binding;
+
         }
     }
+
 
 }
