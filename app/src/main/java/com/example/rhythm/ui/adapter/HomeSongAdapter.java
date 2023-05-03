@@ -54,6 +54,7 @@ public class HomeSongAdapter extends RecyclerView.Adapter<HomeSongAdapter.viewHo
                 intent.putExtra("imageUrl" , responseItem.getImageUrl());
                 intent.putExtra("artistName" , responseItem.getArtist());
                 intent.putExtra("songurl" , responseItem.getPreviewUrl());
+                intent.putExtra("songid" , responseItem.getTrackId());
                 context.startActivity(intent);
             }
         });

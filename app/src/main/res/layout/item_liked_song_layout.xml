@@ -18,13 +18,13 @@
         android:id="@+id/song_name_or_artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/song_name"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/songImage"
         android:layout_marginStart="@dimen/_10sdp"
-        android:textStyle="bold"
+        android:layout_toEndOf="@id/songImage"
+        android:text="@string/song_name"
         android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"/>
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

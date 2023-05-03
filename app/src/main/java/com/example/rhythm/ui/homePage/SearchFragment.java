@@ -89,12 +89,10 @@ public class SearchFragment extends Fragment  {
 
 
     OnSearchItemCLick onsearchCLick= new OnSearchItemCLick() {
-        @Override
-        public void onItemSearchedCLiked(String songName, String url, String artistName, ItemsItem itemsItem) {
-          /*  Fragment fragment = new SongPlayerFragment(songName,url,artistName , itemsItem);
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();*/
 
+
+        @Override
+        public void onItemSearchedCLiked(String songName, String url, String artistName, ItemsItem itemsItem, String songId) {
             Intent intent = new Intent(getActivity(), SongPlayerActivity.class);
             Bundle bundle = new Bundle();
             //bundle.putSerializable("songItem" , itemsItem);
@@ -102,12 +100,11 @@ public class SearchFragment extends Fragment  {
             intent.putExtra("imageUrl" , url);
             intent.putExtra("artistName" , artistName);
             intent.putExtra("songurl" , itemsItem.getPreviewUrl());
+            intent.putExtra("songid" , songId);
+
             //intent.putExtras(bundle);
             startActivity(intent);
-
         }
-
-
     };
 
     private void getSearch(String searchText) {

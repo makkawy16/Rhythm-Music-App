@@ -60,7 +60,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
         });*/
 
         holder.binding.itemSong.setOnClickListener(v -> {
-            searchItemCLick.onItemSearchedCLiked(searchItem.getName(),searchItem.getAlbum().getImages().get(0).getUrl() , searchItem.getArtists().get(0).getName(),searchItem);
+            searchItemCLick.onItemSearchedCLiked(searchItem.getName(),searchItem.getAlbum().getImages().get(0).getUrl() , searchItem.getArtists().get(0).getName(),searchItem,searchItem.getId());
         });
 
     }
