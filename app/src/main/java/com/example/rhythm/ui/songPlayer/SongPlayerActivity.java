@@ -63,8 +63,6 @@ public class SongPlayerActivity extends AppCompatActivity {
         }
 
 
-
-
         Log.d("sssssssssssss", "onCreate: user id player activity   " + userId);
 
 
@@ -80,7 +78,7 @@ public class SongPlayerActivity extends AppCompatActivity {
         Picasso.get().load(imageUrl).into(binding.backgroundImage);
         Picasso.get().load(imageUrl).into(binding.songimage);
 
-        if (songsExist())
+        if (songsExist(songId))
             binding.likeBtn.setImageResource(R.drawable.ic_red_heart_liked);
 
 
@@ -153,23 +151,14 @@ public class SongPlayerActivity extends AppCompatActivity {
         binding.likeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  if (bitmap1.sameAs(bitmap2)) {
+
+                if (!songsExist(songId)) {
                     binding.likeBtn.setImageResource(R.drawable.ic_red_heart_liked);
                     addSongInLikes();
-                } else {
-                    binding.likeBtn.setImageResource(R.drawable.ic_like);
-                    deleteSong();
-                }*/
-                if (!songsExist()){
-                    binding.likeBtn.setImageResource(R.drawable.ic_red_heart_liked);
-                    addSongInLikes();
-                }
-                else{
+                } else if(songsExist(songId)) {
                     binding.likeBtn.setImageResource(R.drawable.ic_like);
                     deleteSong();
                 }
-
-
 
 
             }
@@ -234,23 +223,25 @@ public class SongPlayerActivity extends AppCompatActivity {
                 });
     }
 
-    private boolean songsExist() {
-int count = 0;
+    private boolean songsExist( String songid) {
+        int count = 0;
         List<LikedSong> likedSongs =
                 LikedSongDataBase.getLikedSongDataBase(this)
                         .getLikedSongDao()
                         .getAllLikedSongs();
-        if (likedSongs!=null)
-        {
-            for (LikedSong liked: likedSongs) {
-         while (count!= likedSongs.size()-1)
-                if (likedSongs.get(count).isLiked() )
+        if (likedSongs != null) {
+            while (count != likedSongs.size()) {
+                if (likedSongs.get(count).getSongId().equals(songid))
                     return true;
+
                 count++;
             }
-            return false;
+
+
         }
+
         return false;
+
     }
 
 }
