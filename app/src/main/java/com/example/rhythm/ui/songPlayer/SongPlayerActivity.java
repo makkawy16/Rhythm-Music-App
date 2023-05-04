@@ -195,7 +195,7 @@ public class SongPlayerActivity extends AppCompatActivity {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
 
 
-        database.child("liked songs").child(userId).setValue(likedSong)
+        database.child("liked songs").child(userId).child(songId).setValue(likedSong)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -212,7 +212,7 @@ public class SongPlayerActivity extends AppCompatActivity {
         LikedSongDataBase.getLikedSongDataBase(this)
                 .getLikedSongDao().deleteLikedSong(likedSong);
 
-        database.child("liked songs").child(userId).removeValue()
+        database.child("liked songs").child(userId).child(songId).removeValue()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
