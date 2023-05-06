@@ -141,10 +141,11 @@ public class suggestionFragment extends Fragment {
                         // singerSuggestAdapter.addArtist(response.body().getArtists());
                        /* int listSize = response.body().getArtists().size()/3;
                         artistList2.add(response.body().getArtists().subList(0,listSize));*/
-                        artistList.addAll(response.body().getArtists());
-                        initialSuggestRecycler();
                         if (response.isSuccessful())
                         {
+                            if(response.body() != null)
+                                artistList.addAll(response.body().getArtists());
+                            initialSuggestRecycler();
 
                         }
                     }

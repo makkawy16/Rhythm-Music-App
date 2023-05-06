@@ -54,6 +54,7 @@ public class SingerSuggestAdapter extends RecyclerView.Adapter<SingerSuggestAdap
 
         holder.binding.artistname.setText(artists.getName());
         Picasso.get().load(artists.getImages().get(1).getUrl()).into(holder.binding.artistimage);
+       // holder.binding.selectedIcon.setVisibility(View.INVISIBLE);
 
         holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,12 @@ public class SingerSuggestAdapter extends RecyclerView.Adapter<SingerSuggestAdap
                 Toast.makeText(context, ""+artists.getName(), Toast.LENGTH_SHORT).show();
                 holder.binding.selectedIcon.setVisibility(View.VISIBLE);
                 singerItemClicked.onSingerClicked(artists.getName());
+
+              /*  if (holder.binding.selectedIcon.getVisibility() == View.VISIBLE)
+                    holder.binding.selectedIcon.setVisibility(View.INVISIBLE);*/
+
+
+
             }
         });
     }

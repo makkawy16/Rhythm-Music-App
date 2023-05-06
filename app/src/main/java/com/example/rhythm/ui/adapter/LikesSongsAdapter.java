@@ -1,6 +1,9 @@
 package com.example.rhythm.ui.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -8,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rhythm.databinding.ItemLikedSongLayoutBinding;
 import com.example.rhythm.source.local.roomDB.LikedSong;
+import com.example.rhythm.ui.songPlayer.SongPlayerActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -17,6 +21,11 @@ public class LikesSongsAdapter extends RecyclerView.Adapter<LikesSongsAdapter.vi
 
 
     private List<LikedSong> likedSongsList;
+    Context context;
+
+    public LikesSongsAdapter(Context context) {
+        this.context = context;
+    }
 
     public void addSongToLikes(List<LikedSong> likedSongs) {
         this.likedSongsList = likedSongs;
@@ -39,6 +48,19 @@ public class LikesSongsAdapter extends RecyclerView.Adapter<LikesSongsAdapter.vi
 
         holder.binding.songNameOrArtist.setText(likedSong.getSongName());
         Picasso.get().load(likedSong.getImageUrl()).into(holder.binding.songImage);
+
+        holder.binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context , SongPlayerActivity.class);
+                intent.putExtra("songName" , likedSong.getSongName());
+                intent.putExtra("imageUrl" , likedSong.getImageUrl());
+                intent.putExtra("artistName" , likedSong.getArtistName());
+                intent.putExtra("songurl" , likedSong.getPreviewURL());
+                intent.putExtra("songid" , likedSong.getSongId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 

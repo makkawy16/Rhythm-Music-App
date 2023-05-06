@@ -67,7 +67,7 @@ public class LikesFragment extends Fragment {
 
     private void initRecycler() {
 
-        likesSongsAdapter = new LikesSongsAdapter();
+        likesSongsAdapter = new LikesSongsAdapter(getContext());
         binding.likedSongsRecycler.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.likedSongsRecycler.setAdapter(likesSongsAdapter);
 
