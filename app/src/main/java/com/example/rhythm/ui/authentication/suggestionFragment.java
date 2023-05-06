@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,7 @@ import com.example.rhythm.ui.adapter.OnSingerItemClicked;
 import com.example.rhythm.ui.adapter.SingerSuggestAdapter;
 import com.example.rhythm.ui.homePage.HomePageActivity;
 import com.example.rhythm.utils.Utils;
+import com.example.rhythm.viewModel.SuggestArtistModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,8 @@ public class suggestionFragment extends Fragment {
     Utils utils = new Utils();
     String selectedNames = "";
 
+    SuggestArtistModel suggestArtistModel ;
+
     String artistsIDs = "2GVksDv9UpY60i4CvytrZK,5abSRg0xN1NV3gLbuvX24M,4U7K3Xm1CXe5FpBGYUcHUZ,0qZ24TkLCHoE3ajCzGItJ1,6bb9VI1PpPTEmdgcgjTppX,7yBuSjd5Z3w7acodk51evR,56chSp36PsMhpQvUn1kdR3,4o6vIkdmHiEXZOesrJj3KO,5rNrRYsRVaRJDQhA1PEC6t,5jii08sWD8V92EdOofQo52,6IW026WCYU8L1WF79dfwss,2H6XYL9D5Z3ErkxCD0gmD6,4dpARuHxo51G3z768sgnrY,5D2ui1KD49TfyCDb35zf5V,41g2nSmocqVLuYnmndxefu,5rCq30EbJ3DfZPKybGZj8F,4l7F7EEXy93Jr0uIITY7bN,4cGfgRmpFc9zgZMfuSXhqy,6qqNVTkY8uBg9cP3Jd7DAH";
 
 
@@ -62,6 +66,10 @@ public class suggestionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        suggestArtistModel = new SuggestArtistModel();
+        suggestArtistModel.fetchArtists(getContext());
+
 
     }
 
@@ -93,12 +101,11 @@ public class suggestionFragment extends Fragment {
                 editor.apply(); // or
             }
         };
-        showArtists();
+       // showArtists();
+        observe();
+        initialSuggestRecycler();
 
-        /*SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myshared",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("artistNames" , selectedNames);
-        editor.apply();*/
+
 
 
 
@@ -119,6 +126,19 @@ public class suggestionFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void observe() {
+
+        suggestArtistModel.artistLiveData
+                .observe(getViewLifecycleOwner(), new Observer<ArtistsResponse>() {
+                    @Override
+                    public void onChanged(ArtistsResponse artistsResponse) {
+                        if(singerSuggestAdapter!=null)
+                        singerSuggestAdapter.addArtist(artistsResponse.getArtists());
+                    }
+                });
+
     }
 
     private void initialSuggestRecycler() {
