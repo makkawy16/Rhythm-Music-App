@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.databinding.ActivityHomePageBinding;
 import com.example.rhythm.ui.authentication.AuthenticationActivity;
+import com.example.rhythm.ui.homePage.generation.GenerationFragment;
 import com.example.rhythm.ui.homePage.library.LibraryFragment;
 import com.example.rhythm.utils.SpConnect;
 import com.facebook.CallbackManager;
@@ -65,7 +66,8 @@ public class HomePageActivity extends AppCompatActivity {
                         replaceFragment(new LibraryFragment());
                         break;
                     case R.id.generation_nav:
-                        Toast.makeText(HomePageActivity.this, "generation", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(HomePageActivity.this, "generation", Toast.LENGTH_SHORT).show();
+                        replaceFragment(new GenerationFragment());
                         break;
                 }
 

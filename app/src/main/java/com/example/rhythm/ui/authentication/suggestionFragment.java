@@ -43,11 +43,7 @@ public class suggestionFragment extends Fragment {
 
     FragmentSuggestionBinding binding;
     SingerSuggestAdapter singerSuggestAdapter;
-    SingerSuggestAdapter singerSuggestAdapter2;
-    SingerSuggestAdapter singerSuggestAdapter3;
     List<ArtistsItem> artistList = new ArrayList<>();
-    List<ArtistsItem> artistList2 = new ArrayList<>();
-    List<ArtistsItem> artistList3 = new ArrayList<>();
     OnSingerItemClicked singerItemClicked;
     List<String> singerNames = new ArrayList<>();
     Utils utils = new Utils();
@@ -121,7 +117,6 @@ public class suggestionFragment extends Fragment {
                     intent.putExtra("artistsNames" , selectedNames);
                     startActivity(intent);
                     getActivity().finish();
-                  //  utils.alertDialog("show singers", selectedNames, getContext());
 
                 }
             }
@@ -150,6 +145,7 @@ public class suggestionFragment extends Fragment {
 
     }
 
+/*
     private void showArtists() {
         RetrofitClient.getWepService()
                 .getArtists(artistsIDs)
@@ -157,10 +153,6 @@ public class suggestionFragment extends Fragment {
                     @Override
                     public void onResponse(Call<ArtistsResponse> call, Response<ArtistsResponse> response) {
                         Log.d("ssssssssssss", "onResponse:  singer " + response.body());
-                       // Log.d("ssssssssssss", "onResponse: " + response.body().getArtists().get(0).getName());
-                        // singerSuggestAdapter.addArtist(response.body().getArtists());
-                       /* int listSize = response.body().getArtists().size()/3;
-                        artistList2.add(response.body().getArtists().subList(0,listSize));*/
                         if (response.isSuccessful())
                         {
                             if(response.body() != null)
@@ -176,4 +168,5 @@ public class suggestionFragment extends Fragment {
                     }
                 });
     }
+*/
 }

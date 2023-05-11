@@ -28,6 +28,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.searchView
         this.searchItemCLick = searchItemCLick;
     }
 
+    public void addSearchItems(List<ItemsItem> tracksItems){
+        this.tracksItems = tracksItems;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public searchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
