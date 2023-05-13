@@ -36,6 +36,11 @@
     <string name="favourites">Favourites</string>
     <string name="new_releases">New Releases</string>
     <string name="create_music">Create Music</string>
+    <string name="select_the_type_of_music_to_create">Select The Type of Music To Create</string>
+    <string name="back">Back</string>
+    <string name="the_generated_music_for_you">The Generated Music For You</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>

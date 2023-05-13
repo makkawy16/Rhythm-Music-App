@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_auth"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.homePage.generation.SelectModeFragment">
+
+
+
+    <TextView
+        android:id="@+id/select_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/select_the_type_of_music_to_create"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18ssp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/pop_music_BTN"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:src="@drawable/pop_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_txt"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/beethoven_music_btn"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/beethoven_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintTop_toBottomOf="@id/select_txt"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/chopin_music_BTN"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:src="@drawable/chopin_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pop_music_BTN"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/hiphop_music_btn"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/hiphop_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintTop_toBottomOf="@id/beethoven_music_btn"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/j_pop_music_BTN"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:src="@drawable/j_pop_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chopin_music_BTN"
+        android:layout_margin="@dimen/_15sdp"/>
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/piano_music_btn"
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/piano_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintTop_toBottomOf="@id/hiphop_music_btn"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/_110sdp"
+        android:layout_height="@dimen/_110sdp"
+        android:src="@drawable/pokemon_btn"
+        app:shapeAppearanceOverlay="@style/rounded_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/j_pop_music_BTN"
+        android:layout_margin="@dimen/_15sdp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/back_btn"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/_12sdp"
+        android:background="@drawable/buttonshape"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

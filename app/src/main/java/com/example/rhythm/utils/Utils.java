@@ -1,11 +1,18 @@
 package com.example.rhythm.utils;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.rhythm.R;
 
 public class Utils {
 
@@ -49,5 +56,7 @@ public class Utils {
         mloadingBar.show();
 
     }
+
+
 
 }
