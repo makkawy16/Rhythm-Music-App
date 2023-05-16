@@ -17,12 +17,11 @@ import com.example.rhythm.databinding.FragmentSelectModeBinding;
 
 public class SelectModeFragment extends Fragment {
 
-   FragmentSelectModeBinding binding ;
+    FragmentSelectModeBinding binding;
 
     public SelectModeFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -41,16 +40,34 @@ public class SelectModeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding=FragmentSelectModeBinding.bind(view);
+        binding = FragmentSelectModeBinding.bind(view);
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new GenerationFragment();
+                /*Fragment fragment = new GenerationFragment();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+                fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();*/
+                replaceFragment(new GenerationFragment());
+            }
+        });
+
+        binding.popMusicBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new PlayGeneratedMusicFragment());
             }
         });
 
     }
+
+
+    private void replaceFragment(Fragment fragment) {
+
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+
+
+    }
+
 }
