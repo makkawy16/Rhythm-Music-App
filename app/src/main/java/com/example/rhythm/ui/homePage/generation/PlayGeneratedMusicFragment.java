@@ -125,7 +125,7 @@ public class PlayGeneratedMusicFragment extends Fragment {
 
                 if (mediaPlayer.isPlaying()) {
                     binding.playPauseBtn.setImageResource(R.drawable.play_arrow);
-                    mediaPlayer.stop();
+                    mediaPlayer.pause();
 
                 } else {
                     binding.playPauseBtn.setImageResource(R.drawable.ic_pause);

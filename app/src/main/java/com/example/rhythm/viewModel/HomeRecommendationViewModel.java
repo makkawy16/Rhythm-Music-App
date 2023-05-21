@@ -31,7 +31,7 @@ public class HomeRecommendationViewModel {
                 .enqueue(new Callback<List<RecommendationResponseItem>>() {
                     @Override
                     public void onResponse(Call<List<RecommendationResponseItem>> call, Response<List<RecommendationResponseItem>> response) {
-                      // Log.d("sssssssssssssss", "onResponse: recommend " + response.body());
+                      Log.d("sssssssssssssss", "onResponse: recommend " + response.body());
                         //Log.d("sssssssssssssss", "onResponse: recommend " + response.body().get(1).getName());
 
                         _recommendationLiveData.setValue(response.body());
