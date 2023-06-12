@@ -80,4 +80,18 @@
         app:layout_constraintTop_toBottomOf="@id/gLine"
         android:padding="@dimen/_15sdp"/>
 
+    <TextView
+        android:id="@+id/generatedBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_like"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="start"
+        android:text="Generated Saved"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintTop_toBottomOf="@id/LikesBTN"
+        android:padding="@dimen/_15sdp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
