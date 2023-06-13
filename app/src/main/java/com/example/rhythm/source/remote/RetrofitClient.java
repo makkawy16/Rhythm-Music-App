@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class RetrofitClient {
 
     private final static String BASE_URL = "https://api.spotify.com/v1/";
-    private final static String BASE_URL2 = "https://reco-mll-production.up.railway.app/";
+    private final static String BASE_URL2 = "https://web-production-d8ff.up.railway.app/";
     private static Retrofit retrofit;
     private static Retrofit retrofit2;
 

@@ -81,5 +81,16 @@ public class LibraryFragment extends Fragment {
             }
         });
 
+        binding.generatedBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new GeneratedSavedFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+            }
+        });
+
+
+
     }
 }
