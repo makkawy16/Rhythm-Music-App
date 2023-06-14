@@ -17,10 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.rhythm.R;
+import com.example.rhythm.data.model.newRelease.ItemsItemNewRelease;
+import com.example.rhythm.data.model.newRelease.NewReleaseResponse;
 import com.example.rhythm.data.model.recommendation.RecommendationResponseItem;
 import com.example.rhythm.databinding.FragmentHomeBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
 import com.example.rhythm.ui.adapter.HomeSongAdapter;
+import com.example.rhythm.ui.adapter.NewReleaseAdapter;
+import com.example.rhythm.ui.authentication.AuthenticationActivity;
 import com.example.rhythm.viewModel.HomeRecommendationViewModel;
 
 import java.util.ArrayList;
@@ -39,7 +43,10 @@ public class HomeFragment extends Fragment {
     HomeSongAdapter homeSongAdapterNew;
     List<RecommendationResponseItem> recommendationResponseItemList = new ArrayList<>();
     String selectedFromShared;
-    HomeRecommendationViewModel recommendationViewModel ;
+    HomeRecommendationViewModel recommendationViewModel;
+
+    List<ItemsItemNewRelease> itemsItemNewReleaseList = new ArrayList<>();
+    NewReleaseAdapter newReleaseAdapter;
 
 
     public HomeFragment() {
@@ -55,7 +62,7 @@ public class HomeFragment extends Fragment {
                         Context.MODE_PRIVATE);
         selectedFromShared = shared.getString("names", "no value here");
         recommendationViewModel = new HomeRecommendationViewModel();
-        recommendationViewModel.getRecommendedSongs(getContext(),selectedFromShared);
+        recommendationViewModel.getRecommendedSongs(getContext(), selectedFromShared);
 
     }
 
@@ -80,6 +87,9 @@ public class HomeFragment extends Fragment {
 
 
         observe();
+
+        // if (!AuthenticationActivity.accessToken.)
+        showNewRelease();
 
         /*RetrofitClient.getRecommendationWebService()
                 .firstRecommend(selectedFromShared)
@@ -106,6 +116,26 @@ public class HomeFragment extends Fragment {
 
     }
 
+    public void showNewRelease() {
+
+        RetrofitClient.getNewReleasesWebService().getNewRelease()
+                .enqueue(new Callback<NewReleaseResponse>() {
+                    @Override
+                    public void onResponse(Call<NewReleaseResponse> call, Response<NewReleaseResponse> response) {
+                        Log.d("ssssssssssssss", "onResponse: new release " + response.body());
+
+                        if (response.body() != null)
+                            itemsItemNewReleaseList.addAll(response.body().getAlbums().getItems());
+                        newReleaseAdapter.addNewReleaseToList(itemsItemNewReleaseList);
+                    }
+
+                    @Override
+                    public void onFailure(Call<NewReleaseResponse> call, Throwable t) {
+                        Log.d("ssssssssssssssss", "onFailure:  new release" + t.getLocalizedMessage());
+                    }
+                });
+    }
+
     private void observe() {
         recommendationViewModel.RecommendationLiveData
                 .observe(getViewLifecycleOwner(), new Observer<List<RecommendationResponseItem>>() {
@@ -118,10 +148,18 @@ public class HomeFragment extends Fragment {
 
     private void songRecycler() {
         homeSongAdapterRecomm = new HomeSongAdapter(getContext());
+        newReleaseAdapter = new NewReleaseAdapter(getContext());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
         binding.forYouSongRecycler.setLayoutManager(linearLayoutManager);
         binding.forYouSongRecycler.setAdapter(homeSongAdapterRecomm);
+
+        binding.newReleaseSongRecycler.setLayoutManager(linearLayoutManager2);
+        binding.newReleaseSongRecycler.setAdapter(newReleaseAdapter);
     }
+
 
 }

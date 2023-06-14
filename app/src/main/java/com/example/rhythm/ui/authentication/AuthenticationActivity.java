@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.rhythm.R;
 import com.example.rhythm.data.model.UserModel;
 import com.example.rhythm.databinding.ActivityAuthenticationBinding;
+import com.example.rhythm.ui.homePage.HomeFragment;
 import com.example.rhythm.utils.SpConnect;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
