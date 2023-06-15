@@ -26,6 +26,7 @@ import com.example.rhythm.ui.adapter.HomeSongAdapter;
 import com.example.rhythm.ui.adapter.NewReleaseAdapter;
 import com.example.rhythm.ui.authentication.AuthenticationActivity;
 import com.example.rhythm.viewModel.HomeRecommendationViewModel;
+import com.example.rhythm.viewModel.NewReleaseViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +41,10 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     String artistsSelected;
     HomeSongAdapter homeSongAdapterRecomm;
-    HomeSongAdapter homeSongAdapterNew;
     List<RecommendationResponseItem> recommendationResponseItemList = new ArrayList<>();
     String selectedFromShared;
     HomeRecommendationViewModel recommendationViewModel;
+    NewReleaseViewModel newReleaseViewModel;
 
     List<ItemsItemNewRelease> itemsItemNewReleaseList = new ArrayList<>();
     NewReleaseAdapter newReleaseAdapter;
@@ -63,6 +64,9 @@ public class HomeFragment extends Fragment {
         selectedFromShared = shared.getString("names", "no value here");
         recommendationViewModel = new HomeRecommendationViewModel();
         recommendationViewModel.getRecommendedSongs(getContext(), selectedFromShared);
+
+        newReleaseViewModel = new NewReleaseViewModel();
+        newReleaseViewModel.showNewRelease();
 
     }
 
@@ -87,9 +91,9 @@ public class HomeFragment extends Fragment {
 
 
         observe();
+        observeNewRelease();
 
-        // if (!AuthenticationActivity.accessToken.)
-        showNewRelease();
+        //showNewRelease();
 
         /*RetrofitClient.getRecommendationWebService()
                 .firstRecommend(selectedFromShared)
@@ -116,7 +120,7 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void showNewRelease() {
+    /*public void showNewRelease() {
 
         RetrofitClient.getNewReleasesWebService().getNewRelease()
                 .enqueue(new Callback<NewReleaseResponse>() {
@@ -134,7 +138,7 @@ public class HomeFragment extends Fragment {
                         Log.d("ssssssssssssssss", "onFailure:  new release" + t.getLocalizedMessage());
                     }
                 });
-    }
+    }*/
 
     private void observe() {
         recommendationViewModel.RecommendationLiveData
@@ -142,6 +146,16 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onChanged(List<RecommendationResponseItem> recommendationResponseItems) {
                         homeSongAdapterRecomm.addRecommendedSongs(recommendationResponseItems);
+                    }
+                });
+    }
+
+    private void observeNewRelease() {
+        newReleaseViewModel.newReleaseLiveData
+                .observe(getViewLifecycleOwner(), new Observer<List<ItemsItemNewRelease>>() {
+                    @Override
+                    public void onChanged(List<ItemsItemNewRelease> itemsItemNewReleaseList) {
+                        newReleaseAdapter.addNewReleaseToList(itemsItemNewReleaseList);
                     }
                 });
     }

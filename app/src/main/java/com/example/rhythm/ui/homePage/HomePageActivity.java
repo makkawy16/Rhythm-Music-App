@@ -116,7 +116,6 @@ public class HomePageActivity extends AppCompatActivity {
                     // Handle successful response
                     Log.d("sssssssssss", "onActivityResult: home access token " + response.getAccessToken());
                     AuthenticationActivity.accessToken = response.getAccessToken();
-                    new HomeFragment().showNewRelease();
                     break;
 
                 // Auth flow returned an error
