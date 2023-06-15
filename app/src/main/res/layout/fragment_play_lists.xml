@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.homePage.library.PlayListsFragment">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/your_playlists"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="#2f98d5"
+        android:textStyle="bold"
+        android:shadowColor="@color/white"
+        android:shadowRadius="5"
+        android:textSize="@dimen/_20sdp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/playlistrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintBottom_toTopOf="@id/create_playlistBTN"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:listitem="@layout/item_liked_song_layout" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/create_playlistBTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/buttonshape"
+        android:paddingVertical="@dimen/_10sdp"
+        android:drawableTop="@drawable/ic_add"
+        android:text="@string/create_new_playlist"
+        android:drawableTint="@color/white"
+
+        android:textAllCaps="false"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

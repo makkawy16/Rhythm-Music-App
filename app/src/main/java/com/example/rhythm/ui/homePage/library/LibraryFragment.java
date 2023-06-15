@@ -67,6 +67,9 @@ public class LibraryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "playlists clicked", Toast.LENGTH_SHORT).show();
+                Fragment fragment = new PlayListsFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
 
             }
         });

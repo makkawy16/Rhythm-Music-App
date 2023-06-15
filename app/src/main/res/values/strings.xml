@@ -41,6 +41,8 @@
     <string name="the_generated_music_for_you">The Generated Music For You</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="your_playlists">Your PlayLists</string>
+    <string name="create_new_playlist">Create New Playlist</string>
 
 
 </resources>
