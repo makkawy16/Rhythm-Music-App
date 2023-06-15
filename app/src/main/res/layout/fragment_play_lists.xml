@@ -42,7 +42,6 @@
         android:drawableTop="@drawable/ic_add"
         android:text="@string/create_new_playlist"
         android:drawableTint="@color/white"
-
         android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
