@@ -1,10 +1,12 @@
 package com.example.rhythm.ui.homePage.generation;
 
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
@@ -12,10 +14,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 import com.example.rhythm.R;
+import com.example.rhythm.data.model.generation.GeneratedMusicModel;
 import com.example.rhythm.databinding.FragmentPlayGeneratedMusicBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -29,6 +39,9 @@ public class PlayGeneratedMusicFragment extends Fragment {
     String midiDataString;
     MediaPlayer mediaPlayer;
     private Handler handler = new Handler();
+    String savedSongName = "";
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    private String userId = FirebaseAuth.getInstance().getUid();
 
     public PlayGeneratedMusicFragment() {
         // Required empty public constructor
@@ -137,6 +150,36 @@ public class PlayGeneratedMusicFragment extends Fragment {
             }
         });
 
+
+        binding.saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 View view1 = LayoutInflater.from(getContext()).inflate(R.layout.dialog_layout,null);
+                EditText savedTxt = view1.findViewById(R.id.savedtxt);
+
+                AlertDialog alertDialog = new MaterialAlertDialogBuilder(getContext())
+                        .setTitle("Name The generated Song")
+                        .setView(view1)
+                        .setPositiveButton("save", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                savedSongName = savedTxt.getText().toString();
+                                savedTheGenerated(savedSongName);
+                                Log.d("ssssssssssssssssss", "onClick: "  +savedSongName);
+                                dialog.dismiss();
+
+                            }
+                        }).setNegativeButton("close", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).create();
+                alertDialog.show();
+            }
+        });
+
     }
 
 
@@ -163,6 +206,22 @@ public class PlayGeneratedMusicFragment extends Fragment {
         } else {
             return totalout;
         }
+    }
+
+    private void savedTheGenerated(String theName){
+
+        GeneratedMusicModel generatedMusicModel = new GeneratedMusicModel(theName,midiDataString);
+        databaseReference.child("generated saved").child(userId).child(theName)
+                .setValue(generatedMusicModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful())
+                            Log.d("sssssssssssssss", "onComplete: save generation   success "   );
+                        else
+                            Log.d("sssssssssssssss", "fail: save generation   fail "   );
+
+                    }
+                });
     }
 
 }
