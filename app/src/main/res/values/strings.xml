@@ -44,6 +44,7 @@
     <string name="your_playlists">Your PlayLists</string>
     <string name="create_new_playlist">Create New Playlist</string>
     <string name="based_on_your_likes">Based On Your Likes</string>
+    <string name="specially_for_you">Specially For You</string>
 
 
 </resources>

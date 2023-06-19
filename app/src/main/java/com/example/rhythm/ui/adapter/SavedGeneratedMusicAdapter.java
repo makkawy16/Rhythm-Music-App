@@ -1,5 +1,6 @@
 package com.example.rhythm.ui.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,13 @@ import java.util.List;
 public class SavedGeneratedMusicAdapter extends RecyclerView.Adapter<SavedGeneratedMusicAdapter.viewHolder> {
 
     List<GeneratedMusicModel> generatedMusicModelList;
+    Context context;
+    public SavedGeneratedMusicAdapter() {
+    }
 
-    public void addGeneratedMusic(List<GeneratedMusicModel> generatedMusicModelList) {
+    public void addGeneratedMusic(List<GeneratedMusicModel> generatedMusicModelList, Context context) {
         this.generatedMusicModelList = generatedMusicModelList;
+        this.context=context;
         notifyDataSetChanged();
     }
 

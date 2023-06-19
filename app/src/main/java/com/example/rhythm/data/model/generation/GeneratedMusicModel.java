@@ -10,6 +10,9 @@ public class GeneratedMusicModel {
         this.midiData = midiData;
     }
 
+    public GeneratedMusicModel() {
+    }
+
     public String getMusicName() {
         return musicName;
     }
