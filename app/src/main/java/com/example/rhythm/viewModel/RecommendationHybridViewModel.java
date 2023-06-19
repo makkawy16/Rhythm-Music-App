@@ -33,7 +33,7 @@ public class RecommendationHybridViewModel {
                 .enqueue(new Callback<List<HybridRecommendationResponseItem>>() {
                     @Override
                     public void onResponse(Call<List<HybridRecommendationResponseItem>> call, Response<List<HybridRecommendationResponseItem>> response) {
-                        Log.d("ssssssssssssssss", "onResponse: hybrid view model" + response.body());
+                        Log.d("ssssssssssssssss", "onResponse: hybrid view model" + response.body().get(2).getName());
 
                     }
 

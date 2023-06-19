@@ -20,6 +20,7 @@ public abstract class RetrofitClient {
     private static Retrofit retrofit;
     private static Retrofit retrofit2;
     private static Retrofit retrofit3;
+    private static Retrofit retrofit4;
 
     public static WebService getWepService() {
         if (retrofit == null) {
@@ -62,15 +63,15 @@ public abstract class RetrofitClient {
 
 
     } public static WebService getHybridRecommendationWebService() {
-        if (retrofit2 == null) {
+        if (retrofit4 == null) {
 
-            retrofit2 = new Retrofit.Builder()
+            retrofit4 = new Retrofit.Builder()
                     .baseUrl(BASE_URL4)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
         }
-        return retrofit2.create(WebService.class);
+        return retrofit4.create(WebService.class);
     }
 
 

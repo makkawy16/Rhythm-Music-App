@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
 
         observe();
         observeNewRelease();
-        getHybridRecommendation2("FAR2 KHEBRA");
+       // getHybridRecommendation2("FAR2 KHEBRA");
         observeHybridRecommendation();
 
         //showNewRelease();
@@ -171,13 +171,14 @@ public class HomeFragment extends Fragment {
                 });
     }
 
+/*
     public void getHybridRecommendation2(String songName){
         RetrofitClient.getHybridRecommendationWebService()
                 .getHybridRecommendation(songName)
                 .enqueue(new Callback<List<HybridRecommendationResponseItem>>() {
                     @Override
                     public void onResponse(Call<List<HybridRecommendationResponseItem>> call, Response<List<HybridRecommendationResponseItem>> response) {
-                        Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.body());
+                        Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.body().get(1).getName());
                         Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.message());
                         Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.errorBody());
                         Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.isSuccessful());
@@ -190,6 +191,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+*/
 
     public void observeHybridRecommendation() {
 
