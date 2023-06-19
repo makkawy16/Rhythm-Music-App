@@ -96,6 +96,14 @@ public class LoginFragment extends Fragment {
             startActivity(new Intent(getActivity(), HomePageActivity.class));
             getActivity().finish();
         }
+        binding.loginButtonFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().logInWithReadPermissions(getActivity(), Arrays.asList("public_profile"));
+                //handleFacebookAccessToken(AccessToken.getCurrentAccessToken());
+
+            }
+        });
 
         binding.signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override

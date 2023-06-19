@@ -16,6 +16,7 @@ public abstract class RetrofitClient {
     private final static String BASE_URL = "https://api.spotify.com/v1/";
     private final static String BASE_URL3 = "https://api.spotify.com/v1/browse/";
     private final static String BASE_URL2 = "https://web-production-d8ff.up.railway.app/";
+    private final static String BASE_URL4 = "https://recommendation-production.up.railway.app/";
     private static Retrofit retrofit;
     private static Retrofit retrofit2;
     private static Retrofit retrofit3;
@@ -52,6 +53,19 @@ public abstract class RetrofitClient {
 
             retrofit2 = new Retrofit.Builder()
                     .baseUrl(BASE_URL2)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+        }
+        return retrofit2.create(WebService.class);
+
+
+
+    } public static WebService getHybridRecommendationWebService() {
+        if (retrofit2 == null) {
+
+            retrofit2 = new Retrofit.Builder()
+                    .baseUrl(BASE_URL4)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

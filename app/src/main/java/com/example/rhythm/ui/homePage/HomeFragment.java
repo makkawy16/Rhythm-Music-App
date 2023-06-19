@@ -20,6 +20,8 @@ import com.example.rhythm.R;
 import com.example.rhythm.data.model.newRelease.ItemsItemNewRelease;
 import com.example.rhythm.data.model.newRelease.NewReleaseResponse;
 import com.example.rhythm.data.model.recommendation.RecommendationResponseItem;
+import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommendationResponse;
+import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommendationResponseItem;
 import com.example.rhythm.databinding.FragmentHomeBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
 import com.example.rhythm.ui.adapter.HomeSongAdapter;
@@ -27,6 +29,7 @@ import com.example.rhythm.ui.adapter.NewReleaseAdapter;
 import com.example.rhythm.ui.authentication.AuthenticationActivity;
 import com.example.rhythm.viewModel.HomeRecommendationViewModel;
 import com.example.rhythm.viewModel.NewReleaseViewModel;
+import com.example.rhythm.viewModel.RecommendationHybridViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +46,11 @@ public class HomeFragment extends Fragment {
     HomeSongAdapter homeSongAdapterRecomm;
     List<RecommendationResponseItem> recommendationResponseItemList = new ArrayList<>();
     String selectedFromShared;
+
+
     HomeRecommendationViewModel recommendationViewModel;
     NewReleaseViewModel newReleaseViewModel;
+    RecommendationHybridViewModel recommendationHybridViewModel;
 
     List<ItemsItemNewRelease> itemsItemNewReleaseList = new ArrayList<>();
     NewReleaseAdapter newReleaseAdapter;
@@ -64,6 +70,9 @@ public class HomeFragment extends Fragment {
         selectedFromShared = shared.getString("names", "no value here");
         recommendationViewModel = new HomeRecommendationViewModel();
         recommendationViewModel.getRecommendedSongs(getContext(), selectedFromShared);
+
+        recommendationHybridViewModel = new RecommendationHybridViewModel();
+        recommendationHybridViewModel.getHybridRecommendation("Brazil");
 
         newReleaseViewModel = new NewReleaseViewModel();
         newReleaseViewModel.showNewRelease();
@@ -92,6 +101,8 @@ public class HomeFragment extends Fragment {
 
         observe();
         observeNewRelease();
+        getHybridRecommendation2("FAR2 KHEBRA");
+        observeHybridRecommendation();
 
         //showNewRelease();
 
@@ -158,6 +169,39 @@ public class HomeFragment extends Fragment {
                         newReleaseAdapter.addNewReleaseToList(itemsItemNewReleaseList);
                     }
                 });
+    }
+
+    public void getHybridRecommendation2(String songName){
+        RetrofitClient.getHybridRecommendationWebService()
+                .getHybridRecommendation(songName)
+                .enqueue(new Callback<List<HybridRecommendationResponseItem>>() {
+                    @Override
+                    public void onResponse(Call<List<HybridRecommendationResponseItem>> call, Response<List<HybridRecommendationResponseItem>> response) {
+                        Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.body());
+                        Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.message());
+                        Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.errorBody());
+                        Log.d("ssssssssssssssss", "onResponse: hybrid fragment " + response.isSuccessful());
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<HybridRecommendationResponseItem>> call, Throwable t) {
+                        Log.d("sssssssssssssss", "onFailure: hybrid " + t.getLocalizedMessage());
+                    }
+                });
+    }
+
+    public void observeHybridRecommendation() {
+
+        recommendationHybridViewModel.hybridRecommendationLiveData
+                .observe(getViewLifecycleOwner(), new Observer<List<HybridRecommendationResponseItem>>() {
+                    @Override
+                    public void onChanged(List<HybridRecommendationResponseItem> hybridRecommendationResponseItems) {
+
+                    }
+                });
+
+
     }
 
     private void songRecycler() {

@@ -13,6 +13,9 @@ public interface LikedSongsDAO {
     @Query("select * from LikedSong")
     List<LikedSong> getAllLikedSongs();
 
+    @Query("select * from LikedSong where songName LIKE :songName ")
+    List<LikedSong> getSearched(String songName);
+
     @Insert
     long AddSong(LikedSong likedSong);
 

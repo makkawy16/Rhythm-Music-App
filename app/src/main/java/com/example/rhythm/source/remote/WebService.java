@@ -4,6 +4,8 @@ import com.example.rhythm.data.model.artists.ArtistsResponse;
 import com.example.rhythm.data.model.newRelease.ItemsItemNewRelease;
 import com.example.rhythm.data.model.newRelease.NewReleaseResponse;
 import com.example.rhythm.data.model.recommendation.RecommendationResponseItem;
+import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommendationResponse;
+import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommendationResponseItem;
 import com.example.rhythm.data.model.search.SearchResponseItem;
 
 import java.util.List;
@@ -26,6 +28,9 @@ public interface WebService {
 
     @GET("new-releases")
     Call<NewReleaseResponse> getNewRelease();
+
+    @GET("hybrid/{song_name}")
+    Call<List<HybridRecommendationResponseItem>> getHybridRecommendation(@Path("song_name") String songName);
 
 
 }

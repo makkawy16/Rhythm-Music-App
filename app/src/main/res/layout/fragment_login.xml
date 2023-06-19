@@ -109,7 +109,7 @@
                 android:textColor="@color/txt_color_auth"/>
 
         </LinearLayout>
-       <!-- <com.facebook.login.widget.LoginButton
+        <com.facebook.login.widget.LoginButton
             android:id="@+id/login_button_facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,8 +118,10 @@
             android:layout_marginBottom="30dp"
 
 
-            />-->
+            />
     </LinearLayout>
+
+
 
 
 

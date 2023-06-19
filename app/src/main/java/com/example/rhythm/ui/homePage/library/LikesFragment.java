@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -50,6 +51,34 @@ public class LikesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding = FragmentLikesBinding.bind(view);
+
+
+binding.searchtxt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        List<LikedSong> likedSongs =
+                LikedSongDataBase.getLikedSongDataBase(getContext())
+                        .getLikedSongDao()
+                        .getSearched(query);
+        if (likedSongs!=null)
+            likesSongsAdapter.addSongToLikes(likedSongs);
+
+        return true;    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+
+        List<LikedSong> likedSongs =
+                LikedSongDataBase.getLikedSongDataBase(getContext())
+                        .getLikedSongDao()
+                        .getSearched(newText);
+        if (likedSongs!=null)
+            likesSongsAdapter.addSongToLikes(likedSongs);
+
+        return true;
+    }
+});
+
         initRecycler();
         fetchSongs();
     }
