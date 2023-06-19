@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.rhythm.data.model.recommendation.RecommendationResponseItem;
 import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommendationResponse;
 import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommendationResponseItem;
+import com.example.rhythm.data.model.search.SearchResponseItem;
 import com.example.rhythm.source.remote.RetrofitClient;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class RecommendationHybridViewModel {
 
     public LiveData<List<HybridRecommendationResponseItem>> hybridRecommendationLiveData = _hybridRecommendationLiveData;
 
+    public String imageURL = "";
 
     private MutableLiveData<String> _messageLiveData = new MutableLiveData<>();
     public LiveData<String> messageLiveData = _messageLiveData;
@@ -34,7 +36,30 @@ public class RecommendationHybridViewModel {
                     @Override
                     public void onResponse(Call<List<HybridRecommendationResponseItem>> call, Response<List<HybridRecommendationResponseItem>> response) {
                         Log.d("ssssssssssssssss", "onResponse: hybrid view model" + response.body().get(2).getName());
+                        _hybridRecommendationLiveData.setValue(response.body());
+/*
+                        for (HybridRecommendationResponseItem item : response.body()) {
+                            Log.d("sssssssssssssssss", "the list  :  " + item.getName());
 
+                            RetrofitClient.getWepService()
+                                    .search(item.getName(), "track", 2)
+                                    .enqueue(new Callback<SearchResponseItem>() {
+                                        @Override
+                                        public void onResponse(Call<SearchResponseItem> call, Response<SearchResponseItem> response) {
+                                            imageURL = response.body().getTracks().getItems().get(0).getAlbum().getImages().get(1).getUrl();
+
+                                            Log.d("ssssssssssssssss", "onResponse: hybrid   " + imageURL);
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<SearchResponseItem> call, Throwable t) {
+
+                                        }
+                                    });
+
+                        }
+*/
                     }
 
                     @Override

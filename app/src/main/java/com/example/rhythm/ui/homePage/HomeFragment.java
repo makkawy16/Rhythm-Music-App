@@ -25,6 +25,7 @@ import com.example.rhythm.data.model.recommendationBasedOnLikes.HybridRecommenda
 import com.example.rhythm.databinding.FragmentHomeBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
 import com.example.rhythm.ui.adapter.HomeSongAdapter;
+import com.example.rhythm.ui.adapter.HybridRecommendationAdapter;
 import com.example.rhythm.ui.adapter.NewReleaseAdapter;
 import com.example.rhythm.ui.authentication.AuthenticationActivity;
 import com.example.rhythm.viewModel.HomeRecommendationViewModel;
@@ -54,6 +55,9 @@ public class HomeFragment extends Fragment {
 
     List<ItemsItemNewRelease> itemsItemNewReleaseList = new ArrayList<>();
     NewReleaseAdapter newReleaseAdapter;
+
+    HybridRecommendationAdapter hybridRecommendationAdapter;
+    List<HybridRecommendationResponseItem> hybridRecommendationResponseItemList = new ArrayList<>();
 
 
     public HomeFragment() {
@@ -199,7 +203,7 @@ public class HomeFragment extends Fragment {
                 .observe(getViewLifecycleOwner(), new Observer<List<HybridRecommendationResponseItem>>() {
                     @Override
                     public void onChanged(List<HybridRecommendationResponseItem> hybridRecommendationResponseItems) {
-
+                        hybridRecommendationAdapter.addHybridToList(hybridRecommendationResponseItems);
                     }
                 });
 
@@ -209,16 +213,22 @@ public class HomeFragment extends Fragment {
     private void songRecycler() {
         homeSongAdapterRecomm = new HomeSongAdapter(getContext());
         newReleaseAdapter = new NewReleaseAdapter(getContext());
+        hybridRecommendationAdapter = new HybridRecommendationAdapter();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         linearLayoutManager2.setOrientation(RecyclerView.HORIZONTAL);
+        linearLayoutManager3.setOrientation(RecyclerView.HORIZONTAL);
         binding.forYouSongRecycler.setLayoutManager(linearLayoutManager);
         binding.forYouSongRecycler.setAdapter(homeSongAdapterRecomm);
 
         binding.newReleaseSongRecycler.setLayoutManager(linearLayoutManager2);
         binding.newReleaseSongRecycler.setAdapter(newReleaseAdapter);
+
+        binding.BasedOnLikesSongRecycler.setLayoutManager(linearLayoutManager3);
+        binding.BasedOnLikesSongRecycler.setAdapter(hybridRecommendationAdapter);
     }
 
 
