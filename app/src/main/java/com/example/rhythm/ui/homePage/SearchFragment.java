@@ -25,7 +25,9 @@ import com.example.rhythm.databinding.FragmentSearchBinding;
 import com.example.rhythm.source.remote.RetrofitClient;
 import com.example.rhythm.ui.adapter.OnSearchItemCLick;
 import com.example.rhythm.ui.adapter.SearchAdapter;
+import com.example.rhythm.ui.homePage.informationRetrieval.RecognizeFragment;
 import com.example.rhythm.ui.homePage.library.LikesFragment;
+import com.example.rhythm.ui.homePage.library.PlayListsFragment;
 import com.example.rhythm.ui.homePage.library.SongPlayerFragment;
 import com.example.rhythm.ui.songPlayer.SongPlayerActivity;
 import com.example.rhythm.viewModel.SearchViewModel;
@@ -74,6 +76,15 @@ public class SearchFragment extends Fragment {
 
         initRecycler();
         observe();
+
+        binding.recognizeBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new RecognizeFragment();
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentContainerViewHome, fragment).commit();
+            }
+        });
 
         binding.searchtxt.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
