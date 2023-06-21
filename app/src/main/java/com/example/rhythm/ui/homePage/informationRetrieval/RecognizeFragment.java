@@ -43,9 +43,43 @@ public class RecognizeFragment extends Fragment {
         binding = FragmentRecognizeBinding.bind(view);
 
         AnimationDrawable animationDrawable = (AnimationDrawable) binding.animation.getBackground();
-        animationDrawable.setEnterFadeDuration(2500);
-        animationDrawable.setExitFadeDuration(2500);
+        animationDrawable.setEnterFadeDuration(2000);
+        animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
+
+        binding.progressLoading.setVisibility(View.VISIBLE);
+
+        binding.cannotfound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.recognizedSongName.setText("Sorry... We Can not Found It In Our Data");
+                binding.progressLoading.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+        binding.roma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.recognizedSongName.setText("Cairokee - Roma كايروكي - روما");
+                binding.progressLoading.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+        binding.rolling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.recognizedSongName.setText("Adele - Rolling in the Deep ");
+                binding.progressLoading.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+    }
+
+    public void recognize(){
+
 
     }
 }

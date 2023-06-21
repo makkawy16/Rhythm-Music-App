@@ -79,8 +79,8 @@ public class HomePageActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    //@Override
+    /*protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -130,13 +130,13 @@ public class HomePageActivity extends AppCompatActivity {
             }
         }
 
-    }
+    }*/
 
     @Override
     protected void onStart() {
         super.onStart();
-        SpConnect spConnect = new SpConnect();
-        spConnect.inOnStart(this);
+        /*SpConnect spConnect = new SpConnect();
+        spConnect.inOnStart(this);*/
     }
 
     private void replaceFragment(Fragment fragment) {
